@@ -1,0 +1,41 @@
+[2023-12-08 17:15:51,904][evaluation][INFO] - Burgers
+[2023-12-08 17:15:51,904][evaluation][INFO] - create model and load weight
+[2023-12-08 17:15:52,045][evaluation][INFO] - load ground true
+[2023-12-08 17:15:52,061][evaluation][INFO] - pred
+[2023-12-08 17:15:52,097][evaluation][INFO] - evaluation
+[2023-12-08 17:15:52,097][evaluation][INFO] - print evaluation result
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-O_max error: 4.50525e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-O_mean absolute error: 7.38042e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-O_RMSE: 1.09995e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMIS_1000_max error: 3.85909e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMIS_1000_mean absolute error: 1.60485e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMIS_1000_RMSE: 4.35629e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_1000_max error: 3.23271e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_1000_mean absolute error: 1.27042e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_1000_RMSE: 3.55318e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_Nabia_1000_max error: 4.36911e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_Nabia_1000_mean absolute error: 1.71439e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_Nabia_1000_RMSE: 5.25170e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_Nabia_my1000_max error: 3.31539e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_Nabia_my1000_mean absolute error: 1.41513e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_Nabia_my1000_RMSE: 3.40463e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_uni_max error: 5.28983e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_uni_mean absolute error: 4.45362e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN_uni_RMSE: 9.64743e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_max error: 3.11224e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_mean absolute error: 3.65282e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_RMSE: 7.06066e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-MyNo_max error: 4.59688e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-MyNo_mean absolute error: 4.59232e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-MyNo_RMSE: 7.53102e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMISNo_max error: 3.18945e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMISNo_mean absolute error: 4.51175e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMISNo_RMSE: 6.35908e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_800_max error: 5.90229e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_800_mean absolute error: 3.19818e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-My_800_RMSE: 7.91069e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMIS_800_max error: 3.78726e-01
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMIS_800_mean absolute error: 4.19859e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - PINN-DMIS_800_RMSE: 7.79257e-02
+[2023-12-08 17:15:52,097][evaluation][INFO] - KDV
+[2023-12-08 17:15:52,097][evaluation][INFO] - create model and load weight

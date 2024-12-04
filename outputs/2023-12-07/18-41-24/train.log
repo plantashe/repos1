@@ -1,0 +1,1502 @@
+[2023-12-07 18:41:24,163][Train][INFO] - global_conf:
+  seed: 1000
+  device: cuda
+  tensorboard_path: ./tensorboard_log
+data_conf:
+  initial_data_n: 2000
+  boundary_data_n: 2000
+  pde_data_n: 100000
+model_conf:
+  load_model: false
+  model_path: ./
+  dim:
+    input_dim: 2
+    output_dim: 1
+  layer:
+    layer_n: 3
+    activate: tanh
+    final_activate: Identify
+    norm: false
+    layer_size:
+    - 32
+    - 32
+    - 32
+train_conf:
+  train_t_range:
+  - 0
+  - 0.6
+  eval_t_range:
+  - 0.6
+  - 0.8
+  test_t_range:
+  - 0.8
+  - 1.0
+  pde_sampler: NabianMethod_xiaobo
+  pde_reweighting: BiasedReWeighting
+  optim_conf:
+    lr: 0.005
+    betas:
+    - 0.9
+    - 0.999
+    eps: 1.0e-08
+    weight_decay: 0.0
+    amsgrad: false
+  main_conf:
+    max_steps: 20000
+    pde_batch_size: 5000
+    initial_batch_size: 500
+    boundary_batch_size: 500
+    print_frequency: 1
+    eval_frequency: 250
+    model_save_folder: ./
+    model_basic_save_name: ${name}
+  reweighting_params:
+    k_init: 1
+    k_final: 1.5
+    iter_n: ${train_conf.main_conf.max_steps}
+  sampler_conf:
+    forward_batch_size: ${train_conf.main_conf.pde_batch_size}
+    mesh_update_thres: 0.4
+    addon_points:
+    - - 0.0
+      - 1.0
+    - - 0.0
+      - -1.0
+    - - 0.6
+      - 1.0
+    - - 0.6
+      - -1.0
+    seed_n: 500
+name: Burgers
+problem_conf:
+  dims: 2
+  x_range:
+  - -1
+  - 1
+  t_range:
+  - 0.0
+  - 1.0
+  initial_cond: -sin(pi * x)
+  boundary_cond: 0 * x
+
+[2023-12-07 18:41:24,170][Train][INFO] - device: cuda
+[2023-12-07 18:41:24,171][Train][INFO] - create model...
+[2023-12-07 18:41:24,316][Train][INFO] - FullyConnectedNetwork(
+  (_network): Sequential(
+    (layer_1): Sequential(
+      (0): Linear(in_features=2, out_features=32, bias=True)
+      (1): Tanh()
+    )
+    (layer_2): Sequential(
+      (0): Linear(in_features=32, out_features=32, bias=True)
+      (1): Tanh()
+    )
+    (layer_3): Sequential(
+      (0): Linear(in_features=32, out_features=32, bias=True)
+      (1): Tanh()
+    )
+    (layer_4): Sequential(
+      (0): Linear(in_features=32, out_features=1, bias=True)
+    )
+  )
+)
+[2023-12-07 18:41:24,329][Train][INFO] - create problem data successful...
+[2023-12-07 18:41:24,332][Train][INFO] - split dataset successful...
+[2023-12-07 18:41:25,678][Train][INFO] - step: 0
+[2023-12-07 18:41:25,678][Train][INFO] - pde loss: 4.20560e-04
+[2023-12-07 18:41:25,678][Train][INFO] - initial loss: 5.30793e-01
+[2023-12-07 18:41:25,680][Train][INFO] - boundary loss: 1.61890e-02
+[2023-12-07 18:41:25,680][Train][INFO] - total loss: 5.47403e-01
+[2023-12-07 18:41:25,680][Train][INFO] - evaluation
+[2023-12-07 18:41:25,685][Train][INFO] - train area: peak error:1.0134e+00, absolute error:5.4492e-01, l2 error:3.9191e-01
+[2023-12-07 18:41:25,688][Train][INFO] - eval area: peak error:9.2218e-01, absolute error:4.1341e-01, l2 error:2.4091e-01
+[2023-12-07 18:41:25,689][Train][INFO] - test area: peak error:7.9990e-01, absolute error:3.4602e-01, l2 error:1.7108e-01
+[2023-12-07 18:41:25,740][Train][INFO] - step: 1
+[2023-12-07 18:41:25,740][Train][INFO] - pde loss: 1.39484e-03
+[2023-12-07 18:41:25,740][Train][INFO] - initial loss: 4.58658e-01
+[2023-12-07 18:41:25,741][Train][INFO] - boundary loss: 1.37196e-02
+[2023-12-07 18:41:25,741][Train][INFO] - total loss: 4.73772e-01
+[2023-12-07 18:41:25,790][Train][INFO] - step: 2
+[2023-12-07 18:41:25,790][Train][INFO] - pde loss: 1.31679e-03
+[2023-12-07 18:41:25,790][Train][INFO] - initial loss: 4.16337e-01
+[2023-12-07 18:41:25,791][Train][INFO] - boundary loss: 4.72681e-02
+[2023-12-07 18:41:25,791][Train][INFO] - total loss: 4.64922e-01
+[2023-12-07 18:41:25,840][Train][INFO] - step: 3
+[2023-12-07 18:41:25,840][Train][INFO] - pde loss: 5.17703e-03
+[2023-12-07 18:41:25,840][Train][INFO] - initial loss: 3.40576e-01
+[2023-12-07 18:41:25,841][Train][INFO] - boundary loss: 1.16338e-01
+[2023-12-07 18:41:25,841][Train][INFO] - total loss: 4.62091e-01
+[2023-12-07 18:41:25,887][Train][INFO] - step: 4
+[2023-12-07 18:41:25,887][Train][INFO] - pde loss: 9.50821e-03
+[2023-12-07 18:41:25,888][Train][INFO] - initial loss: 2.95156e-01
+[2023-12-07 18:41:25,888][Train][INFO] - boundary loss: 1.49803e-01
+[2023-12-07 18:41:25,888][Train][INFO] - total loss: 4.54467e-01
+[2023-12-07 18:41:25,941][Train][INFO] - step: 5
+[2023-12-07 18:41:25,941][Train][INFO] - pde loss: 7.62770e-03
+[2023-12-07 18:41:25,941][Train][INFO] - initial loss: 3.14785e-01
+[2023-12-07 18:41:25,942][Train][INFO] - boundary loss: 1.28573e-01
+[2023-12-07 18:41:25,942][Train][INFO] - total loss: 4.50986e-01
+[2023-12-07 18:41:25,990][Train][INFO] - step: 6
+[2023-12-07 18:41:25,991][Train][INFO] - pde loss: 4.66610e-03
+[2023-12-07 18:41:25,991][Train][INFO] - initial loss: 3.55701e-01
+[2023-12-07 18:41:25,991][Train][INFO] - boundary loss: 9.42341e-02
+[2023-12-07 18:41:25,991][Train][INFO] - total loss: 4.54601e-01
+[2023-12-07 18:41:26,038][Train][INFO] - step: 7
+[2023-12-07 18:41:26,038][Train][INFO] - pde loss: 2.53980e-03
+[2023-12-07 18:41:26,039][Train][INFO] - initial loss: 3.68908e-01
+[2023-12-07 18:41:26,039][Train][INFO] - boundary loss: 6.16065e-02
+[2023-12-07 18:41:26,039][Train][INFO] - total loss: 4.33054e-01
+[2023-12-07 18:41:26,091][Train][INFO] - step: 8
+[2023-12-07 18:41:26,091][Train][INFO] - pde loss: 1.43274e-03
+[2023-12-07 18:41:26,091][Train][INFO] - initial loss: 4.05643e-01
+[2023-12-07 18:41:26,092][Train][INFO] - boundary loss: 3.74024e-02
+[2023-12-07 18:41:26,092][Train][INFO] - total loss: 4.44478e-01
+[2023-12-07 18:41:26,142][Train][INFO] - step: 9
+[2023-12-07 18:41:26,142][Train][INFO] - pde loss: 8.82361e-04
+[2023-12-07 18:41:26,142][Train][INFO] - initial loss: 4.04005e-01
+[2023-12-07 18:41:26,143][Train][INFO] - boundary loss: 2.55107e-02
+[2023-12-07 18:41:26,143][Train][INFO] - total loss: 4.30398e-01
+[2023-12-07 18:41:26,196][Train][INFO] - step: 10
+[2023-12-07 18:41:26,197][Train][INFO] - pde loss: 8.48642e-04
+[2023-12-07 18:41:26,197][Train][INFO] - initial loss: 4.00067e-01
+[2023-12-07 18:41:26,197][Train][INFO] - boundary loss: 2.16567e-02
+[2023-12-07 18:41:26,197][Train][INFO] - total loss: 4.22573e-01
+[2023-12-07 18:41:26,247][Train][INFO] - step: 11
+[2023-12-07 18:41:26,247][Train][INFO] - pde loss: 8.06195e-04
+[2023-12-07 18:41:26,248][Train][INFO] - initial loss: 4.25669e-01
+[2023-12-07 18:41:26,248][Train][INFO] - boundary loss: 2.25781e-02
+[2023-12-07 18:41:26,248][Train][INFO] - total loss: 4.49053e-01
+[2023-12-07 18:41:26,302][Train][INFO] - step: 12
+[2023-12-07 18:41:26,303][Train][INFO] - pde loss: 1.11397e-03
+[2023-12-07 18:41:26,303][Train][INFO] - initial loss: 4.02312e-01
+[2023-12-07 18:41:26,303][Train][INFO] - boundary loss: 2.83824e-02
+[2023-12-07 18:41:26,303][Train][INFO] - total loss: 4.31808e-01
+[2023-12-07 18:41:26,353][Train][INFO] - step: 13
+[2023-12-07 18:41:26,353][Train][INFO] - pde loss: 1.71848e-03
+[2023-12-07 18:41:26,355][Train][INFO] - initial loss: 4.00777e-01
+[2023-12-07 18:41:26,355][Train][INFO] - boundary loss: 3.77881e-02
+[2023-12-07 18:41:26,355][Train][INFO] - total loss: 4.40284e-01
+[2023-12-07 18:41:26,406][Train][INFO] - step: 14
+[2023-12-07 18:41:26,406][Train][INFO] - pde loss: 2.67631e-03
+[2023-12-07 18:41:26,406][Train][INFO] - initial loss: 3.96078e-01
+[2023-12-07 18:41:26,407][Train][INFO] - boundary loss: 5.16091e-02
+[2023-12-07 18:41:26,407][Train][INFO] - total loss: 4.50363e-01
+[2023-12-07 18:41:26,455][Train][INFO] - step: 15
+[2023-12-07 18:41:26,455][Train][INFO] - pde loss: 3.51309e-03
+[2023-12-07 18:41:26,456][Train][INFO] - initial loss: 3.49855e-01
+[2023-12-07 18:41:26,456][Train][INFO] - boundary loss: 6.68090e-02
+[2023-12-07 18:41:26,456][Train][INFO] - total loss: 4.20177e-01
+[2023-12-07 18:41:26,508][Train][INFO] - step: 16
+[2023-12-07 18:41:26,508][Train][INFO] - pde loss: 5.42763e-03
+[2023-12-07 18:41:26,508][Train][INFO] - initial loss: 3.51039e-01
+[2023-12-07 18:41:26,509][Train][INFO] - boundary loss: 8.19388e-02
+[2023-12-07 18:41:26,509][Train][INFO] - total loss: 4.38405e-01
+[2023-12-07 18:41:26,563][Train][INFO] - step: 17
+[2023-12-07 18:41:26,563][Train][INFO] - pde loss: 6.57560e-03
+[2023-12-07 18:41:26,563][Train][INFO] - initial loss: 3.43544e-01
+[2023-12-07 18:41:26,564][Train][INFO] - boundary loss: 9.30671e-02
+[2023-12-07 18:41:26,564][Train][INFO] - total loss: 4.43187e-01
+[2023-12-07 18:41:26,613][Train][INFO] - step: 18
+[2023-12-07 18:41:26,613][Train][INFO] - pde loss: 7.20796e-03
+[2023-12-07 18:41:26,613][Train][INFO] - initial loss: 3.14262e-01
+[2023-12-07 18:41:26,613][Train][INFO] - boundary loss: 9.56723e-02
+[2023-12-07 18:41:26,614][Train][INFO] - total loss: 4.17142e-01
+[2023-12-07 18:41:26,662][Train][INFO] - step: 19
+[2023-12-07 18:41:26,662][Train][INFO] - pde loss: 7.25702e-03
+[2023-12-07 18:41:26,662][Train][INFO] - initial loss: 3.35342e-01
+[2023-12-07 18:41:26,663][Train][INFO] - boundary loss: 9.25510e-02
+[2023-12-07 18:41:26,663][Train][INFO] - total loss: 4.35150e-01
+[2023-12-07 18:41:26,711][Train][INFO] - step: 20
+[2023-12-07 18:41:26,712][Train][INFO] - pde loss: 6.65675e-03
+[2023-12-07 18:41:26,712][Train][INFO] - initial loss: 3.58877e-01
+[2023-12-07 18:41:26,712][Train][INFO] - boundary loss: 8.57600e-02
+[2023-12-07 18:41:26,712][Train][INFO] - total loss: 4.51293e-01
+[2023-12-07 18:41:26,760][Train][INFO] - step: 21
+[2023-12-07 18:41:26,760][Train][INFO] - pde loss: 5.86519e-03
+[2023-12-07 18:41:26,761][Train][INFO] - initial loss: 3.33373e-01
+[2023-12-07 18:41:26,761][Train][INFO] - boundary loss: 7.38031e-02
+[2023-12-07 18:41:26,761][Train][INFO] - total loss: 4.13042e-01
+[2023-12-07 18:41:26,813][Train][INFO] - step: 22
+[2023-12-07 18:41:26,814][Train][INFO] - pde loss: 5.05712e-03
+[2023-12-07 18:41:26,814][Train][INFO] - initial loss: 3.55776e-01
+[2023-12-07 18:41:26,814][Train][INFO] - boundary loss: 6.35462e-02
+[2023-12-07 18:41:26,815][Train][INFO] - total loss: 4.24379e-01
+[2023-12-07 18:41:26,867][Train][INFO] - step: 23
+[2023-12-07 18:41:26,868][Train][INFO] - pde loss: 4.34853e-03
+[2023-12-07 18:41:26,868][Train][INFO] - initial loss: 3.51500e-01
+[2023-12-07 18:41:26,868][Train][INFO] - boundary loss: 5.49751e-02
+[2023-12-07 18:41:26,869][Train][INFO] - total loss: 4.10823e-01
+[2023-12-07 18:41:26,916][Train][INFO] - step: 24
+[2023-12-07 18:41:26,916][Train][INFO] - pde loss: 4.03953e-03
+[2023-12-07 18:41:26,917][Train][INFO] - initial loss: 3.80635e-01
+[2023-12-07 18:41:26,917][Train][INFO] - boundary loss: 4.80514e-02
+[2023-12-07 18:41:26,917][Train][INFO] - total loss: 4.32726e-01
+[2023-12-07 18:41:26,967][Train][INFO] - step: 25
+[2023-12-07 18:41:26,967][Train][INFO] - pde loss: 3.82880e-03
+[2023-12-07 18:41:26,967][Train][INFO] - initial loss: 3.95666e-01
+[2023-12-07 18:41:26,968][Train][INFO] - boundary loss: 4.34507e-02
+[2023-12-07 18:41:26,968][Train][INFO] - total loss: 4.42946e-01
+[2023-12-07 18:41:27,018][Train][INFO] - step: 26
+[2023-12-07 18:41:27,019][Train][INFO] - pde loss: 3.41178e-03
+[2023-12-07 18:41:27,019][Train][INFO] - initial loss: 3.86777e-01
+[2023-12-07 18:41:27,019][Train][INFO] - boundary loss: 4.02382e-02
+[2023-12-07 18:41:27,020][Train][INFO] - total loss: 4.30427e-01
+[2023-12-07 18:41:27,068][Train][INFO] - step: 27
+[2023-12-07 18:41:27,069][Train][INFO] - pde loss: 3.73158e-03
+[2023-12-07 18:41:27,069][Train][INFO] - initial loss: 3.76152e-01
+[2023-12-07 18:41:27,069][Train][INFO] - boundary loss: 4.10280e-02
+[2023-12-07 18:41:27,070][Train][INFO] - total loss: 4.20912e-01
+[2023-12-07 18:41:27,122][Train][INFO] - step: 28
+[2023-12-07 18:41:27,122][Train][INFO] - pde loss: 4.25536e-03
+[2023-12-07 18:41:27,123][Train][INFO] - initial loss: 3.59304e-01
+[2023-12-07 18:41:27,123][Train][INFO] - boundary loss: 4.58745e-02
+[2023-12-07 18:41:27,123][Train][INFO] - total loss: 4.09434e-01
+[2023-12-07 18:41:27,174][Train][INFO] - step: 29
+[2023-12-07 18:41:27,174][Train][INFO] - pde loss: 4.96619e-03
+[2023-12-07 18:41:27,174][Train][INFO] - initial loss: 3.52218e-01
+[2023-12-07 18:41:27,175][Train][INFO] - boundary loss: 5.26013e-02
+[2023-12-07 18:41:27,175][Train][INFO] - total loss: 4.09786e-01
+[2023-12-07 18:41:27,224][Train][INFO] - step: 30
+[2023-12-07 18:41:27,224][Train][INFO] - pde loss: 5.95165e-03
+[2023-12-07 18:41:27,225][Train][INFO] - initial loss: 3.52067e-01
+[2023-12-07 18:41:27,225][Train][INFO] - boundary loss: 6.06881e-02
+[2023-12-07 18:41:27,225][Train][INFO] - total loss: 4.18707e-01
+[2023-12-07 18:41:27,273][Train][INFO] - step: 31
+[2023-12-07 18:41:27,274][Train][INFO] - pde loss: 7.26993e-03
+[2023-12-07 18:41:27,274][Train][INFO] - initial loss: 3.43652e-01
+[2023-12-07 18:41:27,274][Train][INFO] - boundary loss: 6.85839e-02
+[2023-12-07 18:41:27,275][Train][INFO] - total loss: 4.19506e-01
+[2023-12-07 18:41:27,335][Train][INFO] - step: 32
+[2023-12-07 18:41:27,335][Train][INFO] - pde loss: 8.00964e-03
+[2023-12-07 18:41:27,336][Train][INFO] - initial loss: 3.18079e-01
+[2023-12-07 18:41:27,336][Train][INFO] - boundary loss: 7.39015e-02
+[2023-12-07 18:41:27,336][Train][INFO] - total loss: 3.99990e-01
+[2023-12-07 18:41:27,388][Train][INFO] - step: 33
+[2023-12-07 18:41:27,389][Train][INFO] - pde loss: 7.93195e-03
+[2023-12-07 18:41:27,389][Train][INFO] - initial loss: 3.40432e-01
+[2023-12-07 18:41:27,389][Train][INFO] - boundary loss: 7.45376e-02
+[2023-12-07 18:41:27,389][Train][INFO] - total loss: 4.22902e-01
+[2023-12-07 18:41:27,439][Train][INFO] - step: 34
+[2023-12-07 18:41:27,439][Train][INFO] - pde loss: 8.60299e-03
+[2023-12-07 18:41:27,439][Train][INFO] - initial loss: 2.93949e-01
+[2023-12-07 18:41:27,440][Train][INFO] - boundary loss: 7.49492e-02
+[2023-12-07 18:41:27,440][Train][INFO] - total loss: 3.77501e-01
+[2023-12-07 18:41:27,490][Train][INFO] - step: 35
+[2023-12-07 18:41:27,491][Train][INFO] - pde loss: 7.92793e-03
+[2023-12-07 18:41:27,491][Train][INFO] - initial loss: 3.29641e-01
+[2023-12-07 18:41:27,491][Train][INFO] - boundary loss: 6.81535e-02
+[2023-12-07 18:41:27,491][Train][INFO] - total loss: 4.05723e-01
+[2023-12-07 18:41:27,542][Train][INFO] - step: 36
+[2023-12-07 18:41:27,542][Train][INFO] - pde loss: 6.99548e-03
+[2023-12-07 18:41:27,542][Train][INFO] - initial loss: 3.21013e-01
+[2023-12-07 18:41:27,542][Train][INFO] - boundary loss: 5.73991e-02
+[2023-12-07 18:41:27,542][Train][INFO] - total loss: 3.85408e-01
+[2023-12-07 18:41:27,595][Train][INFO] - step: 37
+[2023-12-07 18:41:27,595][Train][INFO] - pde loss: 6.56759e-03
+[2023-12-07 18:41:27,595][Train][INFO] - initial loss: 3.38334e-01
+[2023-12-07 18:41:27,596][Train][INFO] - boundary loss: 4.84692e-02
+[2023-12-07 18:41:27,596][Train][INFO] - total loss: 3.93371e-01
+[2023-12-07 18:41:27,645][Train][INFO] - step: 38
+[2023-12-07 18:41:27,645][Train][INFO] - pde loss: 6.06522e-03
+[2023-12-07 18:41:27,645][Train][INFO] - initial loss: 3.22558e-01
+[2023-12-07 18:41:27,645][Train][INFO] - boundary loss: 4.31871e-02
+[2023-12-07 18:41:27,646][Train][INFO] - total loss: 3.71810e-01
+[2023-12-07 18:41:27,695][Train][INFO] - step: 39
+[2023-12-07 18:41:27,695][Train][INFO] - pde loss: 5.86160e-03
+[2023-12-07 18:41:27,696][Train][INFO] - initial loss: 2.96370e-01
+[2023-12-07 18:41:27,696][Train][INFO] - boundary loss: 4.21823e-02
+[2023-12-07 18:41:27,696][Train][INFO] - total loss: 3.44414e-01
+[2023-12-07 18:41:27,750][Train][INFO] - step: 40
+[2023-12-07 18:41:27,751][Train][INFO] - pde loss: 5.79132e-03
+[2023-12-07 18:41:27,751][Train][INFO] - initial loss: 3.06018e-01
+[2023-12-07 18:41:27,751][Train][INFO] - boundary loss: 4.34330e-02
+[2023-12-07 18:41:27,751][Train][INFO] - total loss: 3.55242e-01
+[2023-12-07 18:41:27,799][Train][INFO] - step: 41
+[2023-12-07 18:41:27,799][Train][INFO] - pde loss: 6.24668e-03
+[2023-12-07 18:41:27,800][Train][INFO] - initial loss: 2.78085e-01
+[2023-12-07 18:41:27,800][Train][INFO] - boundary loss: 4.84534e-02
+[2023-12-07 18:41:27,800][Train][INFO] - total loss: 3.32785e-01
+[2023-12-07 18:41:27,852][Train][INFO] - step: 42
+[2023-12-07 18:41:27,852][Train][INFO] - pde loss: 6.98130e-03
+[2023-12-07 18:41:27,852][Train][INFO] - initial loss: 2.68408e-01
+[2023-12-07 18:41:27,852][Train][INFO] - boundary loss: 5.39642e-02
+[2023-12-07 18:41:27,852][Train][INFO] - total loss: 3.29353e-01
+[2023-12-07 18:41:27,904][Train][INFO] - step: 43
+[2023-12-07 18:41:27,904][Train][INFO] - pde loss: 7.43242e-03
+[2023-12-07 18:41:27,905][Train][INFO] - initial loss: 2.60615e-01
+[2023-12-07 18:41:27,905][Train][INFO] - boundary loss: 5.39503e-02
+[2023-12-07 18:41:27,905][Train][INFO] - total loss: 3.21998e-01
+[2023-12-07 18:41:27,954][Train][INFO] - step: 44
+[2023-12-07 18:41:27,954][Train][INFO] - pde loss: 7.28711e-03
+[2023-12-07 18:41:27,954][Train][INFO] - initial loss: 2.38922e-01
+[2023-12-07 18:41:27,955][Train][INFO] - boundary loss: 4.99052e-02
+[2023-12-07 18:41:27,955][Train][INFO] - total loss: 2.96114e-01
+[2023-12-07 18:41:28,003][Train][INFO] - step: 45
+[2023-12-07 18:41:28,003][Train][INFO] - pde loss: 7.02403e-03
+[2023-12-07 18:41:28,004][Train][INFO] - initial loss: 2.49004e-01
+[2023-12-07 18:41:28,004][Train][INFO] - boundary loss: 3.97760e-02
+[2023-12-07 18:41:28,004][Train][INFO] - total loss: 2.95804e-01
+[2023-12-07 18:41:28,055][Train][INFO] - step: 46
+[2023-12-07 18:41:28,055][Train][INFO] - pde loss: 7.50793e-03
+[2023-12-07 18:41:28,056][Train][INFO] - initial loss: 2.23039e-01
+[2023-12-07 18:41:28,056][Train][INFO] - boundary loss: 3.47944e-02
+[2023-12-07 18:41:28,056][Train][INFO] - total loss: 2.65341e-01
+[2023-12-07 18:41:28,104][Train][INFO] - step: 47
+[2023-12-07 18:41:28,105][Train][INFO] - pde loss: 9.11321e-03
+[2023-12-07 18:41:28,105][Train][INFO] - initial loss: 2.20539e-01
+[2023-12-07 18:41:28,105][Train][INFO] - boundary loss: 3.22038e-02
+[2023-12-07 18:41:28,106][Train][INFO] - total loss: 2.61856e-01
+[2023-12-07 18:41:28,153][Train][INFO] - step: 48
+[2023-12-07 18:41:28,154][Train][INFO] - pde loss: 1.21889e-02
+[2023-12-07 18:41:28,154][Train][INFO] - initial loss: 1.96513e-01
+[2023-12-07 18:41:28,154][Train][INFO] - boundary loss: 3.62482e-02
+[2023-12-07 18:41:28,155][Train][INFO] - total loss: 2.44950e-01
+[2023-12-07 18:41:28,210][Train][INFO] - step: 49
+[2023-12-07 18:41:28,210][Train][INFO] - pde loss: 1.54496e-02
+[2023-12-07 18:41:28,211][Train][INFO] - initial loss: 1.79902e-01
+[2023-12-07 18:41:28,211][Train][INFO] - boundary loss: 4.12137e-02
+[2023-12-07 18:41:28,211][Train][INFO] - total loss: 2.36566e-01
+[2023-12-07 18:41:28,263][Train][INFO] - step: 50
+[2023-12-07 18:41:28,263][Train][INFO] - pde loss: 1.90972e-02
+[2023-12-07 18:41:28,264][Train][INFO] - initial loss: 1.55270e-01
+[2023-12-07 18:41:28,264][Train][INFO] - boundary loss: 3.70310e-02
+[2023-12-07 18:41:28,264][Train][INFO] - total loss: 2.11398e-01
+[2023-12-07 18:41:28,312][Train][INFO] - step: 51
+[2023-12-07 18:41:28,313][Train][INFO] - pde loss: 2.35357e-02
+[2023-12-07 18:41:28,313][Train][INFO] - initial loss: 1.50781e-01
+[2023-12-07 18:41:28,313][Train][INFO] - boundary loss: 2.37149e-02
+[2023-12-07 18:41:28,314][Train][INFO] - total loss: 1.98032e-01
+[2023-12-07 18:41:28,368][Train][INFO] - step: 52
+[2023-12-07 18:41:28,368][Train][INFO] - pde loss: 2.99902e-02
+[2023-12-07 18:41:28,368][Train][INFO] - initial loss: 1.44150e-01
+[2023-12-07 18:41:28,369][Train][INFO] - boundary loss: 1.29817e-02
+[2023-12-07 18:41:28,369][Train][INFO] - total loss: 1.87122e-01
+[2023-12-07 18:41:28,423][Train][INFO] - step: 53
+[2023-12-07 18:41:28,424][Train][INFO] - pde loss: 3.96939e-02
+[2023-12-07 18:41:28,424][Train][INFO] - initial loss: 1.32427e-01
+[2023-12-07 18:41:28,424][Train][INFO] - boundary loss: 1.35942e-02
+[2023-12-07 18:41:28,424][Train][INFO] - total loss: 1.85715e-01
+[2023-12-07 18:41:28,477][Train][INFO] - step: 54
+[2023-12-07 18:41:28,478][Train][INFO] - pde loss: 5.59059e-02
+[2023-12-07 18:41:28,478][Train][INFO] - initial loss: 9.99104e-02
+[2023-12-07 18:41:28,478][Train][INFO] - boundary loss: 2.56890e-02
+[2023-12-07 18:41:28,479][Train][INFO] - total loss: 1.81505e-01
+[2023-12-07 18:41:28,527][Train][INFO] - step: 55
+[2023-12-07 18:41:28,527][Train][INFO] - pde loss: 6.49111e-02
+[2023-12-07 18:41:28,528][Train][INFO] - initial loss: 1.04616e-01
+[2023-12-07 18:41:28,528][Train][INFO] - boundary loss: 1.26401e-02
+[2023-12-07 18:41:28,528][Train][INFO] - total loss: 1.82167e-01
+[2023-12-07 18:41:28,578][Train][INFO] - step: 56
+[2023-12-07 18:41:28,578][Train][INFO] - pde loss: 7.34671e-02
+[2023-12-07 18:41:28,578][Train][INFO] - initial loss: 1.12686e-01
+[2023-12-07 18:41:28,579][Train][INFO] - boundary loss: 4.16709e-03
+[2023-12-07 18:41:28,579][Train][INFO] - total loss: 1.90320e-01
+[2023-12-07 18:41:28,632][Train][INFO] - step: 57
+[2023-12-07 18:41:28,633][Train][INFO] - pde loss: 7.63544e-02
+[2023-12-07 18:41:28,633][Train][INFO] - initial loss: 9.37654e-02
+[2023-12-07 18:41:28,633][Train][INFO] - boundary loss: 5.74962e-03
+[2023-12-07 18:41:28,633][Train][INFO] - total loss: 1.75869e-01
+[2023-12-07 18:41:28,684][Train][INFO] - step: 58
+[2023-12-07 18:41:28,685][Train][INFO] - pde loss: 8.93442e-02
+[2023-12-07 18:41:28,685][Train][INFO] - initial loss: 8.06988e-02
+[2023-12-07 18:41:28,685][Train][INFO] - boundary loss: 1.02301e-02
+[2023-12-07 18:41:28,685][Train][INFO] - total loss: 1.80273e-01
+[2023-12-07 18:41:28,736][Train][INFO] - step: 59
+[2023-12-07 18:41:28,736][Train][INFO] - pde loss: 8.87749e-02
+[2023-12-07 18:41:28,736][Train][INFO] - initial loss: 8.08956e-02
+[2023-12-07 18:41:28,737][Train][INFO] - boundary loss: 5.52459e-03
+[2023-12-07 18:41:28,737][Train][INFO] - total loss: 1.75195e-01
+[2023-12-07 18:41:28,784][Train][INFO] - step: 60
+[2023-12-07 18:41:28,785][Train][INFO] - pde loss: 7.80365e-02
+[2023-12-07 18:41:28,785][Train][INFO] - initial loss: 9.14620e-02
+[2023-12-07 18:41:28,786][Train][INFO] - boundary loss: 3.34008e-03
+[2023-12-07 18:41:28,786][Train][INFO] - total loss: 1.72839e-01
+[2023-12-07 18:41:28,834][Train][INFO] - step: 61
+[2023-12-07 18:41:28,834][Train][INFO] - pde loss: 8.34814e-02
+[2023-12-07 18:41:28,835][Train][INFO] - initial loss: 8.08497e-02
+[2023-12-07 18:41:28,835][Train][INFO] - boundary loss: 6.55543e-03
+[2023-12-07 18:41:28,835][Train][INFO] - total loss: 1.70887e-01
+[2023-12-07 18:41:28,884][Train][INFO] - step: 62
+[2023-12-07 18:41:28,884][Train][INFO] - pde loss: 7.99563e-02
+[2023-12-07 18:41:28,884][Train][INFO] - initial loss: 7.24141e-02
+[2023-12-07 18:41:28,885][Train][INFO] - boundary loss: 1.18614e-02
+[2023-12-07 18:41:28,885][Train][INFO] - total loss: 1.64232e-01
+[2023-12-07 18:41:28,938][Train][INFO] - step: 63
+[2023-12-07 18:41:28,938][Train][INFO] - pde loss: 6.15374e-02
+[2023-12-07 18:41:28,938][Train][INFO] - initial loss: 9.78773e-02
+[2023-12-07 18:41:28,939][Train][INFO] - boundary loss: 4.82669e-03
+[2023-12-07 18:41:28,939][Train][INFO] - total loss: 1.64241e-01
+[2023-12-07 18:41:28,993][Train][INFO] - step: 64
+[2023-12-07 18:41:28,993][Train][INFO] - pde loss: 5.30827e-02
+[2023-12-07 18:41:28,993][Train][INFO] - initial loss: 9.31089e-02
+[2023-12-07 18:41:28,994][Train][INFO] - boundary loss: 8.04297e-03
+[2023-12-07 18:41:28,994][Train][INFO] - total loss: 1.54235e-01
+[2023-12-07 18:41:29,041][Train][INFO] - step: 65
+[2023-12-07 18:41:29,041][Train][INFO] - pde loss: 5.08050e-02
+[2023-12-07 18:41:29,041][Train][INFO] - initial loss: 9.38253e-02
+[2023-12-07 18:41:29,042][Train][INFO] - boundary loss: 1.46233e-02
+[2023-12-07 18:41:29,042][Train][INFO] - total loss: 1.59254e-01
+[2023-12-07 18:41:29,090][Train][INFO] - step: 66
+[2023-12-07 18:41:29,090][Train][INFO] - pde loss: 4.54013e-02
+[2023-12-07 18:41:29,090][Train][INFO] - initial loss: 9.37081e-02
+[2023-12-07 18:41:29,090][Train][INFO] - boundary loss: 1.58720e-02
+[2023-12-07 18:41:29,090][Train][INFO] - total loss: 1.54981e-01
+[2023-12-07 18:41:29,144][Train][INFO] - step: 67
+[2023-12-07 18:41:29,144][Train][INFO] - pde loss: 3.62478e-02
+[2023-12-07 18:41:29,144][Train][INFO] - initial loss: 1.13017e-01
+[2023-12-07 18:41:29,144][Train][INFO] - boundary loss: 1.09527e-02
+[2023-12-07 18:41:29,145][Train][INFO] - total loss: 1.60218e-01
+[2023-12-07 18:41:29,196][Train][INFO] - step: 68
+[2023-12-07 18:41:29,196][Train][INFO] - pde loss: 3.43157e-02
+[2023-12-07 18:41:29,196][Train][INFO] - initial loss: 1.01247e-01
+[2023-12-07 18:41:29,197][Train][INFO] - boundary loss: 1.32311e-02
+[2023-12-07 18:41:29,197][Train][INFO] - total loss: 1.48794e-01
+[2023-12-07 18:41:29,246][Train][INFO] - step: 69
+[2023-12-07 18:41:29,246][Train][INFO] - pde loss: 2.96944e-02
+[2023-12-07 18:41:29,246][Train][INFO] - initial loss: 1.03920e-01
+[2023-12-07 18:41:29,246][Train][INFO] - boundary loss: 1.55957e-02
+[2023-12-07 18:41:29,247][Train][INFO] - total loss: 1.49210e-01
+[2023-12-07 18:41:29,295][Train][INFO] - step: 70
+[2023-12-07 18:41:29,295][Train][INFO] - pde loss: 2.93396e-02
+[2023-12-07 18:41:29,296][Train][INFO] - initial loss: 1.02390e-01
+[2023-12-07 18:41:29,296][Train][INFO] - boundary loss: 1.66823e-02
+[2023-12-07 18:41:29,297][Train][INFO] - total loss: 1.48412e-01
+[2023-12-07 18:41:29,345][Train][INFO] - step: 71
+[2023-12-07 18:41:29,345][Train][INFO] - pde loss: 3.04931e-02
+[2023-12-07 18:41:29,345][Train][INFO] - initial loss: 1.01091e-01
+[2023-12-07 18:41:29,346][Train][INFO] - boundary loss: 1.42160e-02
+[2023-12-07 18:41:29,346][Train][INFO] - total loss: 1.45801e-01
+[2023-12-07 18:41:29,394][Train][INFO] - step: 72
+[2023-12-07 18:41:29,394][Train][INFO] - pde loss: 2.76395e-02
+[2023-12-07 18:41:29,394][Train][INFO] - initial loss: 1.05047e-01
+[2023-12-07 18:41:29,394][Train][INFO] - boundary loss: 1.23931e-02
+[2023-12-07 18:41:29,396][Train][INFO] - total loss: 1.45079e-01
+[2023-12-07 18:41:29,446][Train][INFO] - step: 73
+[2023-12-07 18:41:29,447][Train][INFO] - pde loss: 3.45655e-02
+[2023-12-07 18:41:29,447][Train][INFO] - initial loss: 9.90282e-02
+[2023-12-07 18:41:29,447][Train][INFO] - boundary loss: 1.50135e-02
+[2023-12-07 18:41:29,447][Train][INFO] - total loss: 1.48607e-01
+[2023-12-07 18:41:29,495][Train][INFO] - step: 74
+[2023-12-07 18:41:29,496][Train][INFO] - pde loss: 3.48809e-02
+[2023-12-07 18:41:29,496][Train][INFO] - initial loss: 9.25865e-02
+[2023-12-07 18:41:29,496][Train][INFO] - boundary loss: 1.11851e-02
+[2023-12-07 18:41:29,497][Train][INFO] - total loss: 1.38653e-01
+[2023-12-07 18:41:29,544][Train][INFO] - step: 75
+[2023-12-07 18:41:29,545][Train][INFO] - pde loss: 3.81413e-02
+[2023-12-07 18:41:29,545][Train][INFO] - initial loss: 8.44270e-02
+[2023-12-07 18:41:29,545][Train][INFO] - boundary loss: 9.02938e-03
+[2023-12-07 18:41:29,545][Train][INFO] - total loss: 1.31598e-01
+[2023-12-07 18:41:29,592][Train][INFO] - step: 76
+[2023-12-07 18:41:29,593][Train][INFO] - pde loss: 4.55716e-02
+[2023-12-07 18:41:29,593][Train][INFO] - initial loss: 8.59169e-02
+[2023-12-07 18:41:29,593][Train][INFO] - boundary loss: 8.16826e-03
+[2023-12-07 18:41:29,593][Train][INFO] - total loss: 1.39657e-01
+[2023-12-07 18:41:29,642][Train][INFO] - step: 77
+[2023-12-07 18:41:29,642][Train][INFO] - pde loss: 4.62092e-02
+[2023-12-07 18:41:29,643][Train][INFO] - initial loss: 7.48495e-02
+[2023-12-07 18:41:29,643][Train][INFO] - boundary loss: 9.67547e-03
+[2023-12-07 18:41:29,643][Train][INFO] - total loss: 1.30734e-01
+[2023-12-07 18:41:29,692][Train][INFO] - step: 78
+[2023-12-07 18:41:29,692][Train][INFO] - pde loss: 4.92986e-02
+[2023-12-07 18:41:29,693][Train][INFO] - initial loss: 7.38056e-02
+[2023-12-07 18:41:29,693][Train][INFO] - boundary loss: 8.30080e-03
+[2023-12-07 18:41:29,693][Train][INFO] - total loss: 1.31405e-01
+[2023-12-07 18:41:29,744][Train][INFO] - step: 79
+[2023-12-07 18:41:29,744][Train][INFO] - pde loss: 4.86255e-02
+[2023-12-07 18:41:29,744][Train][INFO] - initial loss: 7.72428e-02
+[2023-12-07 18:41:29,744][Train][INFO] - boundary loss: 5.89318e-03
+[2023-12-07 18:41:29,745][Train][INFO] - total loss: 1.31761e-01
+[2023-12-07 18:41:29,791][Train][INFO] - step: 80
+[2023-12-07 18:41:29,791][Train][INFO] - pde loss: 5.08340e-02
+[2023-12-07 18:41:29,792][Train][INFO] - initial loss: 7.39422e-02
+[2023-12-07 18:41:29,792][Train][INFO] - boundary loss: 8.25133e-03
+[2023-12-07 18:41:29,792][Train][INFO] - total loss: 1.33027e-01
+[2023-12-07 18:41:29,841][Train][INFO] - step: 81
+[2023-12-07 18:41:29,841][Train][INFO] - pde loss: 4.92074e-02
+[2023-12-07 18:41:29,841][Train][INFO] - initial loss: 6.78582e-02
+[2023-12-07 18:41:29,843][Train][INFO] - boundary loss: 1.18917e-02
+[2023-12-07 18:41:29,843][Train][INFO] - total loss: 1.28957e-01
+[2023-12-07 18:41:29,891][Train][INFO] - step: 82
+[2023-12-07 18:41:29,891][Train][INFO] - pde loss: 4.27803e-02
+[2023-12-07 18:41:29,892][Train][INFO] - initial loss: 7.45255e-02
+[2023-12-07 18:41:29,892][Train][INFO] - boundary loss: 7.63872e-03
+[2023-12-07 18:41:29,892][Train][INFO] - total loss: 1.24944e-01
+[2023-12-07 18:41:29,947][Train][INFO] - step: 83
+[2023-12-07 18:41:29,947][Train][INFO] - pde loss: 3.97995e-02
+[2023-12-07 18:41:29,947][Train][INFO] - initial loss: 7.26798e-02
+[2023-12-07 18:41:29,948][Train][INFO] - boundary loss: 8.15773e-03
+[2023-12-07 18:41:29,948][Train][INFO] - total loss: 1.20637e-01
+[2023-12-07 18:41:30,001][Train][INFO] - step: 84
+[2023-12-07 18:41:30,002][Train][INFO] - pde loss: 4.02001e-02
+[2023-12-07 18:41:30,002][Train][INFO] - initial loss: 7.19996e-02
+[2023-12-07 18:41:30,002][Train][INFO] - boundary loss: 1.11762e-02
+[2023-12-07 18:41:30,003][Train][INFO] - total loss: 1.23376e-01
+[2023-12-07 18:41:30,055][Train][INFO] - step: 85
+[2023-12-07 18:41:30,055][Train][INFO] - pde loss: 3.74927e-02
+[2023-12-07 18:41:30,056][Train][INFO] - initial loss: 6.65628e-02
+[2023-12-07 18:41:30,056][Train][INFO] - boundary loss: 1.64969e-02
+[2023-12-07 18:41:30,056][Train][INFO] - total loss: 1.20552e-01
+[2023-12-07 18:41:30,106][Train][INFO] - step: 86
+[2023-12-07 18:41:30,107][Train][INFO] - pde loss: 3.47873e-02
+[2023-12-07 18:41:30,107][Train][INFO] - initial loss: 7.45969e-02
+[2023-12-07 18:41:30,107][Train][INFO] - boundary loss: 9.59025e-03
+[2023-12-07 18:41:30,107][Train][INFO] - total loss: 1.18974e-01
+[2023-12-07 18:41:30,155][Train][INFO] - step: 87
+[2023-12-07 18:41:30,156][Train][INFO] - pde loss: 3.30537e-02
+[2023-12-07 18:41:30,156][Train][INFO] - initial loss: 7.46422e-02
+[2023-12-07 18:41:30,156][Train][INFO] - boundary loss: 1.02370e-02
+[2023-12-07 18:41:30,156][Train][INFO] - total loss: 1.17933e-01
+[2023-12-07 18:41:30,205][Train][INFO] - step: 88
+[2023-12-07 18:41:30,205][Train][INFO] - pde loss: 3.68249e-02
+[2023-12-07 18:41:30,206][Train][INFO] - initial loss: 6.05055e-02
+[2023-12-07 18:41:30,206][Train][INFO] - boundary loss: 1.74401e-02
+[2023-12-07 18:41:30,206][Train][INFO] - total loss: 1.14771e-01
+[2023-12-07 18:41:30,256][Train][INFO] - step: 89
+[2023-12-07 18:41:30,257][Train][INFO] - pde loss: 3.69016e-02
+[2023-12-07 18:41:30,257][Train][INFO] - initial loss: 6.99745e-02
+[2023-12-07 18:41:30,257][Train][INFO] - boundary loss: 1.01319e-02
+[2023-12-07 18:41:30,257][Train][INFO] - total loss: 1.17008e-01
+[2023-12-07 18:41:30,305][Train][INFO] - step: 90
+[2023-12-07 18:41:30,305][Train][INFO] - pde loss: 3.68894e-02
+[2023-12-07 18:41:30,306][Train][INFO] - initial loss: 7.25361e-02
+[2023-12-07 18:41:30,306][Train][INFO] - boundary loss: 8.45397e-03
+[2023-12-07 18:41:30,306][Train][INFO] - total loss: 1.17880e-01
+[2023-12-07 18:41:30,355][Train][INFO] - step: 91
+[2023-12-07 18:41:30,355][Train][INFO] - pde loss: 3.91842e-02
+[2023-12-07 18:41:30,355][Train][INFO] - initial loss: 5.98547e-02
+[2023-12-07 18:41:30,355][Train][INFO] - boundary loss: 1.24706e-02
+[2023-12-07 18:41:30,356][Train][INFO] - total loss: 1.11509e-01
+[2023-12-07 18:41:30,403][Train][INFO] - step: 92
+[2023-12-07 18:41:30,404][Train][INFO] - pde loss: 4.09310e-02
+[2023-12-07 18:41:30,404][Train][INFO] - initial loss: 6.17476e-02
+[2023-12-07 18:41:30,404][Train][INFO] - boundary loss: 1.31687e-02
+[2023-12-07 18:41:30,405][Train][INFO] - total loss: 1.15847e-01
+[2023-12-07 18:41:30,458][Train][INFO] - step: 93
+[2023-12-07 18:41:30,458][Train][INFO] - pde loss: 4.01715e-02
+[2023-12-07 18:41:30,459][Train][INFO] - initial loss: 6.80601e-02
+[2023-12-07 18:41:30,459][Train][INFO] - boundary loss: 7.28025e-03
+[2023-12-07 18:41:30,459][Train][INFO] - total loss: 1.15512e-01
+[2023-12-07 18:41:30,512][Train][INFO] - step: 94
+[2023-12-07 18:41:30,512][Train][INFO] - pde loss: 4.18745e-02
+[2023-12-07 18:41:30,513][Train][INFO] - initial loss: 5.70902e-02
+[2023-12-07 18:41:30,513][Train][INFO] - boundary loss: 9.23488e-03
+[2023-12-07 18:41:30,513][Train][INFO] - total loss: 1.08200e-01
+[2023-12-07 18:41:30,567][Train][INFO] - step: 95
+[2023-12-07 18:41:30,567][Train][INFO] - pde loss: 4.30734e-02
+[2023-12-07 18:41:30,568][Train][INFO] - initial loss: 5.49350e-02
+[2023-12-07 18:41:30,568][Train][INFO] - boundary loss: 1.05582e-02
+[2023-12-07 18:41:30,569][Train][INFO] - total loss: 1.08567e-01
+[2023-12-07 18:41:30,623][Train][INFO] - step: 96
+[2023-12-07 18:41:30,623][Train][INFO] - pde loss: 3.98588e-02
+[2023-12-07 18:41:30,623][Train][INFO] - initial loss: 6.09849e-02
+[2023-12-07 18:41:30,623][Train][INFO] - boundary loss: 5.61080e-03
+[2023-12-07 18:41:30,624][Train][INFO] - total loss: 1.06454e-01
+[2023-12-07 18:41:30,678][Train][INFO] - step: 97
+[2023-12-07 18:41:30,678][Train][INFO] - pde loss: 4.17127e-02
+[2023-12-07 18:41:30,678][Train][INFO] - initial loss: 5.66635e-02
+[2023-12-07 18:41:30,679][Train][INFO] - boundary loss: 7.46813e-03
+[2023-12-07 18:41:30,679][Train][INFO] - total loss: 1.05844e-01
+[2023-12-07 18:41:30,732][Train][INFO] - step: 98
+[2023-12-07 18:41:30,732][Train][INFO] - pde loss: 4.15500e-02
+[2023-12-07 18:41:30,732][Train][INFO] - initial loss: 5.77461e-02
+[2023-12-07 18:41:30,733][Train][INFO] - boundary loss: 1.26475e-02
+[2023-12-07 18:41:30,733][Train][INFO] - total loss: 1.11944e-01
+[2023-12-07 18:41:30,784][Train][INFO] - step: 99
+[2023-12-07 18:41:30,784][Train][INFO] - pde loss: 3.58460e-02
+[2023-12-07 18:41:30,784][Train][INFO] - initial loss: 6.24622e-02
+[2023-12-07 18:41:30,785][Train][INFO] - boundary loss: 6.75726e-03
+[2023-12-07 18:41:30,785][Train][INFO] - total loss: 1.05065e-01
+[2023-12-07 18:41:30,841][Train][INFO] - step: 100
+[2023-12-07 18:41:30,841][Train][INFO] - pde loss: 3.30873e-02
+[2023-12-07 18:41:30,842][Train][INFO] - initial loss: 6.53457e-02
+[2023-12-07 18:41:30,842][Train][INFO] - boundary loss: 5.59896e-03
+[2023-12-07 18:41:30,842][Train][INFO] - total loss: 1.04032e-01
+[2023-12-07 18:41:30,894][Train][INFO] - step: 101
+[2023-12-07 18:41:30,895][Train][INFO] - pde loss: 3.58962e-02
+[2023-12-07 18:41:30,895][Train][INFO] - initial loss: 5.80442e-02
+[2023-12-07 18:41:30,895][Train][INFO] - boundary loss: 1.16761e-02
+[2023-12-07 18:41:30,896][Train][INFO] - total loss: 1.05617e-01
+[2023-12-07 18:41:30,950][Train][INFO] - step: 102
+[2023-12-07 18:41:30,950][Train][INFO] - pde loss: 3.53777e-02
+[2023-12-07 18:41:30,951][Train][INFO] - initial loss: 5.60632e-02
+[2023-12-07 18:41:30,951][Train][INFO] - boundary loss: 1.41545e-02
+[2023-12-07 18:41:30,951][Train][INFO] - total loss: 1.05595e-01
+[2023-12-07 18:41:31,006][Train][INFO] - step: 103
+[2023-12-07 18:41:31,007][Train][INFO] - pde loss: 2.96095e-02
+[2023-12-07 18:41:31,007][Train][INFO] - initial loss: 7.03936e-02
+[2023-12-07 18:41:31,007][Train][INFO] - boundary loss: 4.25082e-03
+[2023-12-07 18:41:31,008][Train][INFO] - total loss: 1.04254e-01
+[2023-12-07 18:41:31,061][Train][INFO] - step: 104
+[2023-12-07 18:41:31,061][Train][INFO] - pde loss: 3.11432e-02
+[2023-12-07 18:41:31,062][Train][INFO] - initial loss: 6.29108e-02
+[2023-12-07 18:41:31,062][Train][INFO] - boundary loss: 7.42824e-03
+[2023-12-07 18:41:31,062][Train][INFO] - total loss: 1.01482e-01
+[2023-12-07 18:41:31,116][Train][INFO] - step: 105
+[2023-12-07 18:41:31,116][Train][INFO] - pde loss: 3.80892e-02
+[2023-12-07 18:41:31,117][Train][INFO] - initial loss: 5.06621e-02
+[2023-12-07 18:41:31,117][Train][INFO] - boundary loss: 1.47543e-02
+[2023-12-07 18:41:31,118][Train][INFO] - total loss: 1.03506e-01
+[2023-12-07 18:41:31,174][Train][INFO] - step: 106
+[2023-12-07 18:41:31,175][Train][INFO] - pde loss: 3.12743e-02
+[2023-12-07 18:41:31,175][Train][INFO] - initial loss: 5.78151e-02
+[2023-12-07 18:41:31,176][Train][INFO] - boundary loss: 6.05551e-03
+[2023-12-07 18:41:31,176][Train][INFO] - total loss: 9.51449e-02
+[2023-12-07 18:41:31,229][Train][INFO] - step: 107
+[2023-12-07 18:41:31,229][Train][INFO] - pde loss: 3.02018e-02
+[2023-12-07 18:41:31,230][Train][INFO] - initial loss: 6.64691e-02
+[2023-12-07 18:41:31,230][Train][INFO] - boundary loss: 3.33552e-03
+[2023-12-07 18:41:31,230][Train][INFO] - total loss: 1.00006e-01
+[2023-12-07 18:41:31,284][Train][INFO] - step: 108
+[2023-12-07 18:41:31,285][Train][INFO] - pde loss: 3.68061e-02
+[2023-12-07 18:41:31,285][Train][INFO] - initial loss: 5.14333e-02
+[2023-12-07 18:41:31,286][Train][INFO] - boundary loss: 9.56437e-03
+[2023-12-07 18:41:31,286][Train][INFO] - total loss: 9.78037e-02
+[2023-12-07 18:41:31,342][Train][INFO] - step: 109
+[2023-12-07 18:41:31,342][Train][INFO] - pde loss: 3.56065e-02
+[2023-12-07 18:41:31,342][Train][INFO] - initial loss: 4.99631e-02
+[2023-12-07 18:41:31,343][Train][INFO] - boundary loss: 1.12449e-02
+[2023-12-07 18:41:31,343][Train][INFO] - total loss: 9.68144e-02
+[2023-12-07 18:41:31,396][Train][INFO] - step: 110
+[2023-12-07 18:41:31,396][Train][INFO] - pde loss: 3.07001e-02
+[2023-12-07 18:41:31,396][Train][INFO] - initial loss: 6.28213e-02
+[2023-12-07 18:41:31,396][Train][INFO] - boundary loss: 4.35970e-03
+[2023-12-07 18:41:31,397][Train][INFO] - total loss: 9.78812e-02
+[2023-12-07 18:41:31,456][Train][INFO] - step: 111
+[2023-12-07 18:41:31,456][Train][INFO] - pde loss: 3.22088e-02
+[2023-12-07 18:41:31,456][Train][INFO] - initial loss: 6.15502e-02
+[2023-12-07 18:41:31,456][Train][INFO] - boundary loss: 5.15096e-03
+[2023-12-07 18:41:31,457][Train][INFO] - total loss: 9.89100e-02
+[2023-12-07 18:41:31,511][Train][INFO] - step: 112
+[2023-12-07 18:41:31,513][Train][INFO] - pde loss: 3.50632e-02
+[2023-12-07 18:41:31,513][Train][INFO] - initial loss: 5.21248e-02
+[2023-12-07 18:41:31,513][Train][INFO] - boundary loss: 9.58421e-03
+[2023-12-07 18:41:31,513][Train][INFO] - total loss: 9.67723e-02
+[2023-12-07 18:41:31,566][Train][INFO] - step: 113
+[2023-12-07 18:41:31,566][Train][INFO] - pde loss: 3.19324e-02
+[2023-12-07 18:41:31,566][Train][INFO] - initial loss: 5.58107e-02
+[2023-12-07 18:41:31,566][Train][INFO] - boundary loss: 7.68104e-03
+[2023-12-07 18:41:31,566][Train][INFO] - total loss: 9.54241e-02
+[2023-12-07 18:41:31,625][Train][INFO] - step: 114
+[2023-12-07 18:41:31,626][Train][INFO] - pde loss: 2.75259e-02
+[2023-12-07 18:41:31,626][Train][INFO] - initial loss: 6.30893e-02
+[2023-12-07 18:41:31,626][Train][INFO] - boundary loss: 4.69724e-03
+[2023-12-07 18:41:31,626][Train][INFO] - total loss: 9.53124e-02
+[2023-12-07 18:41:31,678][Train][INFO] - step: 115
+[2023-12-07 18:41:31,679][Train][INFO] - pde loss: 3.11324e-02
+[2023-12-07 18:41:31,679][Train][INFO] - initial loss: 5.79265e-02
+[2023-12-07 18:41:31,679][Train][INFO] - boundary loss: 5.26170e-03
+[2023-12-07 18:41:31,679][Train][INFO] - total loss: 9.43207e-02
+[2023-12-07 18:41:31,733][Train][INFO] - step: 116
+[2023-12-07 18:41:31,733][Train][INFO] - pde loss: 3.12383e-02
+[2023-12-07 18:41:31,733][Train][INFO] - initial loss: 4.98223e-02
+[2023-12-07 18:41:31,733][Train][INFO] - boundary loss: 9.03997e-03
+[2023-12-07 18:41:31,735][Train][INFO] - total loss: 9.01006e-02
+[2023-12-07 18:41:31,790][Train][INFO] - step: 117
+[2023-12-07 18:41:31,790][Train][INFO] - pde loss: 3.23266e-02
+[2023-12-07 18:41:31,791][Train][INFO] - initial loss: 5.46499e-02
+[2023-12-07 18:41:31,791][Train][INFO] - boundary loss: 7.83254e-03
+[2023-12-07 18:41:31,792][Train][INFO] - total loss: 9.48091e-02
+[2023-12-07 18:41:31,846][Train][INFO] - step: 118
+[2023-12-07 18:41:31,846][Train][INFO] - pde loss: 2.99850e-02
+[2023-12-07 18:41:31,847][Train][INFO] - initial loss: 5.68209e-02
+[2023-12-07 18:41:31,847][Train][INFO] - boundary loss: 4.78202e-03
+[2023-12-07 18:41:31,847][Train][INFO] - total loss: 9.15879e-02
+[2023-12-07 18:41:31,905][Train][INFO] - step: 119
+[2023-12-07 18:41:31,906][Train][INFO] - pde loss: 3.13381e-02
+[2023-12-07 18:41:31,906][Train][INFO] - initial loss: 5.32100e-02
+[2023-12-07 18:41:31,906][Train][INFO] - boundary loss: 5.23527e-03
+[2023-12-07 18:41:31,907][Train][INFO] - total loss: 8.97834e-02
+[2023-12-07 18:41:31,962][Train][INFO] - step: 120
+[2023-12-07 18:41:31,962][Train][INFO] - pde loss: 3.22698e-02
+[2023-12-07 18:41:31,963][Train][INFO] - initial loss: 5.08223e-02
+[2023-12-07 18:41:31,963][Train][INFO] - boundary loss: 5.13949e-03
+[2023-12-07 18:41:31,963][Train][INFO] - total loss: 8.82316e-02
+[2023-12-07 18:41:32,017][Train][INFO] - step: 121
+[2023-12-07 18:41:32,018][Train][INFO] - pde loss: 3.13596e-02
+[2023-12-07 18:41:32,018][Train][INFO] - initial loss: 5.23472e-02
+[2023-12-07 18:41:32,018][Train][INFO] - boundary loss: 5.28947e-03
+[2023-12-07 18:41:32,019][Train][INFO] - total loss: 8.89963e-02
+[2023-12-07 18:41:32,074][Train][INFO] - step: 122
+[2023-12-07 18:41:32,074][Train][INFO] - pde loss: 3.09189e-02
+[2023-12-07 18:41:32,075][Train][INFO] - initial loss: 4.94358e-02
+[2023-12-07 18:41:32,075][Train][INFO] - boundary loss: 6.60294e-03
+[2023-12-07 18:41:32,075][Train][INFO] - total loss: 8.69576e-02
+[2023-12-07 18:41:32,130][Train][INFO] - step: 123
+[2023-12-07 18:41:32,131][Train][INFO] - pde loss: 2.80005e-02
+[2023-12-07 18:41:32,131][Train][INFO] - initial loss: 5.69896e-02
+[2023-12-07 18:41:32,131][Train][INFO] - boundary loss: 4.13196e-03
+[2023-12-07 18:41:32,132][Train][INFO] - total loss: 8.91221e-02
+[2023-12-07 18:41:32,188][Train][INFO] - step: 124
+[2023-12-07 18:41:32,188][Train][INFO] - pde loss: 2.99249e-02
+[2023-12-07 18:41:32,189][Train][INFO] - initial loss: 5.37500e-02
+[2023-12-07 18:41:32,189][Train][INFO] - boundary loss: 4.94283e-03
+[2023-12-07 18:41:32,189][Train][INFO] - total loss: 8.86177e-02
+[2023-12-07 18:41:32,246][Train][INFO] - step: 125
+[2023-12-07 18:41:32,246][Train][INFO] - pde loss: 2.94777e-02
+[2023-12-07 18:41:32,247][Train][INFO] - initial loss: 4.79453e-02
+[2023-12-07 18:41:32,247][Train][INFO] - boundary loss: 7.15588e-03
+[2023-12-07 18:41:32,247][Train][INFO] - total loss: 8.45788e-02
+[2023-12-07 18:41:32,302][Train][INFO] - step: 126
+[2023-12-07 18:41:32,302][Train][INFO] - pde loss: 2.83127e-02
+[2023-12-07 18:41:32,302][Train][INFO] - initial loss: 5.34502e-02
+[2023-12-07 18:41:32,303][Train][INFO] - boundary loss: 4.87505e-03
+[2023-12-07 18:41:32,303][Train][INFO] - total loss: 8.66379e-02
+[2023-12-07 18:41:32,357][Train][INFO] - step: 127
+[2023-12-07 18:41:32,357][Train][INFO] - pde loss: 2.54253e-02
+[2023-12-07 18:41:32,358][Train][INFO] - initial loss: 5.28484e-02
+[2023-12-07 18:41:32,358][Train][INFO] - boundary loss: 2.87154e-03
+[2023-12-07 18:41:32,358][Train][INFO] - total loss: 8.11453e-02
+[2023-12-07 18:41:32,413][Train][INFO] - step: 128
+[2023-12-07 18:41:32,413][Train][INFO] - pde loss: 2.98020e-02
+[2023-12-07 18:41:32,413][Train][INFO] - initial loss: 4.70450e-02
+[2023-12-07 18:41:32,414][Train][INFO] - boundary loss: 5.43755e-03
+[2023-12-07 18:41:32,414][Train][INFO] - total loss: 8.22846e-02
+[2023-12-07 18:41:32,466][Train][INFO] - step: 129
+[2023-12-07 18:41:32,467][Train][INFO] - pde loss: 3.15256e-02
+[2023-12-07 18:41:32,467][Train][INFO] - initial loss: 4.65134e-02
+[2023-12-07 18:41:32,468][Train][INFO] - boundary loss: 5.66664e-03
+[2023-12-07 18:41:32,468][Train][INFO] - total loss: 8.37057e-02
+[2023-12-07 18:41:32,527][Train][INFO] - step: 130
+[2023-12-07 18:41:32,527][Train][INFO] - pde loss: 2.66155e-02
+[2023-12-07 18:41:32,528][Train][INFO] - initial loss: 4.99249e-02
+[2023-12-07 18:41:32,528][Train][INFO] - boundary loss: 2.95519e-03
+[2023-12-07 18:41:32,528][Train][INFO] - total loss: 7.94956e-02
+[2023-12-07 18:41:32,580][Train][INFO] - step: 131
+[2023-12-07 18:41:32,580][Train][INFO] - pde loss: 2.63783e-02
+[2023-12-07 18:41:32,581][Train][INFO] - initial loss: 5.21738e-02
+[2023-12-07 18:41:32,581][Train][INFO] - boundary loss: 3.35085e-03
+[2023-12-07 18:41:32,581][Train][INFO] - total loss: 8.19029e-02
+[2023-12-07 18:41:32,635][Train][INFO] - step: 132
+[2023-12-07 18:41:32,635][Train][INFO] - pde loss: 2.87917e-02
+[2023-12-07 18:41:32,635][Train][INFO] - initial loss: 4.44128e-02
+[2023-12-07 18:41:32,636][Train][INFO] - boundary loss: 6.78215e-03
+[2023-12-07 18:41:32,636][Train][INFO] - total loss: 7.99867e-02
+[2023-12-07 18:41:32,690][Train][INFO] - step: 133
+[2023-12-07 18:41:32,690][Train][INFO] - pde loss: 2.56237e-02
+[2023-12-07 18:41:32,690][Train][INFO] - initial loss: 4.98246e-02
+[2023-12-07 18:41:32,691][Train][INFO] - boundary loss: 3.66967e-03
+[2023-12-07 18:41:32,691][Train][INFO] - total loss: 7.91179e-02
+[2023-12-07 18:41:32,746][Train][INFO] - step: 134
+[2023-12-07 18:41:32,747][Train][INFO] - pde loss: 2.64256e-02
+[2023-12-07 18:41:32,747][Train][INFO] - initial loss: 5.16072e-02
+[2023-12-07 18:41:32,747][Train][INFO] - boundary loss: 2.86096e-03
+[2023-12-07 18:41:32,747][Train][INFO] - total loss: 8.08938e-02
+[2023-12-07 18:41:32,800][Train][INFO] - step: 135
+[2023-12-07 18:41:32,800][Train][INFO] - pde loss: 2.89272e-02
+[2023-12-07 18:41:32,801][Train][INFO] - initial loss: 4.29406e-02
+[2023-12-07 18:41:32,801][Train][INFO] - boundary loss: 4.82544e-03
+[2023-12-07 18:41:32,801][Train][INFO] - total loss: 7.66933e-02
+[2023-12-07 18:41:32,855][Train][INFO] - step: 136
+[2023-12-07 18:41:32,855][Train][INFO] - pde loss: 3.03194e-02
+[2023-12-07 18:41:32,855][Train][INFO] - initial loss: 5.00461e-02
+[2023-12-07 18:41:32,856][Train][INFO] - boundary loss: 3.40266e-03
+[2023-12-07 18:41:32,856][Train][INFO] - total loss: 8.37682e-02
+[2023-12-07 18:41:32,914][Train][INFO] - step: 137
+[2023-12-07 18:41:32,914][Train][INFO] - pde loss: 2.90629e-02
+[2023-12-07 18:41:32,915][Train][INFO] - initial loss: 4.82599e-02
+[2023-12-07 18:41:32,915][Train][INFO] - boundary loss: 3.58265e-03
+[2023-12-07 18:41:32,915][Train][INFO] - total loss: 8.09054e-02
+[2023-12-07 18:41:32,968][Train][INFO] - step: 138
+[2023-12-07 18:41:32,968][Train][INFO] - pde loss: 2.81107e-02
+[2023-12-07 18:41:32,968][Train][INFO] - initial loss: 4.60381e-02
+[2023-12-07 18:41:32,969][Train][INFO] - boundary loss: 4.06508e-03
+[2023-12-07 18:41:32,969][Train][INFO] - total loss: 7.82139e-02
+[2023-12-07 18:41:33,026][Train][INFO] - step: 139
+[2023-12-07 18:41:33,026][Train][INFO] - pde loss: 2.78232e-02
+[2023-12-07 18:41:33,026][Train][INFO] - initial loss: 4.92275e-02
+[2023-12-07 18:41:33,027][Train][INFO] - boundary loss: 2.48560e-03
+[2023-12-07 18:41:33,027][Train][INFO] - total loss: 7.95363e-02
+[2023-12-07 18:41:33,083][Train][INFO] - step: 140
+[2023-12-07 18:41:33,083][Train][INFO] - pde loss: 2.73445e-02
+[2023-12-07 18:41:33,084][Train][INFO] - initial loss: 4.46252e-02
+[2023-12-07 18:41:33,084][Train][INFO] - boundary loss: 3.95900e-03
+[2023-12-07 18:41:33,084][Train][INFO] - total loss: 7.59287e-02
+[2023-12-07 18:41:33,142][Train][INFO] - step: 141
+[2023-12-07 18:41:33,142][Train][INFO] - pde loss: 2.60181e-02
+[2023-12-07 18:41:33,142][Train][INFO] - initial loss: 4.69170e-02
+[2023-12-07 18:41:33,143][Train][INFO] - boundary loss: 2.68710e-03
+[2023-12-07 18:41:33,143][Train][INFO] - total loss: 7.56221e-02
+[2023-12-07 18:41:33,197][Train][INFO] - step: 142
+[2023-12-07 18:41:33,197][Train][INFO] - pde loss: 2.36900e-02
+[2023-12-07 18:41:33,198][Train][INFO] - initial loss: 4.70551e-02
+[2023-12-07 18:41:33,198][Train][INFO] - boundary loss: 2.12241e-03
+[2023-12-07 18:41:33,198][Train][INFO] - total loss: 7.28675e-02
+[2023-12-07 18:41:33,254][Train][INFO] - step: 143
+[2023-12-07 18:41:33,255][Train][INFO] - pde loss: 2.54334e-02
+[2023-12-07 18:41:33,255][Train][INFO] - initial loss: 4.26670e-02
+[2023-12-07 18:41:33,255][Train][INFO] - boundary loss: 4.84839e-03
+[2023-12-07 18:41:33,256][Train][INFO] - total loss: 7.29488e-02
+[2023-12-07 18:41:33,311][Train][INFO] - step: 144
+[2023-12-07 18:41:33,312][Train][INFO] - pde loss: 2.38275e-02
+[2023-12-07 18:41:33,312][Train][INFO] - initial loss: 5.10738e-02
+[2023-12-07 18:41:33,312][Train][INFO] - boundary loss: 2.27394e-03
+[2023-12-07 18:41:33,313][Train][INFO] - total loss: 7.71752e-02
+[2023-12-07 18:41:33,367][Train][INFO] - step: 145
+[2023-12-07 18:41:33,367][Train][INFO] - pde loss: 2.46635e-02
+[2023-12-07 18:41:33,368][Train][INFO] - initial loss: 4.91136e-02
+[2023-12-07 18:41:33,368][Train][INFO] - boundary loss: 1.50871e-03
+[2023-12-07 18:41:33,368][Train][INFO] - total loss: 7.52858e-02
+[2023-12-07 18:41:33,424][Train][INFO] - step: 146
+[2023-12-07 18:41:33,424][Train][INFO] - pde loss: 2.84497e-02
+[2023-12-07 18:41:33,425][Train][INFO] - initial loss: 3.97726e-02
+[2023-12-07 18:41:33,425][Train][INFO] - boundary loss: 5.33085e-03
+[2023-12-07 18:41:33,425][Train][INFO] - total loss: 7.35532e-02
+[2023-12-07 18:41:33,480][Train][INFO] - step: 147
+[2023-12-07 18:41:33,481][Train][INFO] - pde loss: 2.73261e-02
+[2023-12-07 18:41:33,481][Train][INFO] - initial loss: 4.21539e-02
+[2023-12-07 18:41:33,481][Train][INFO] - boundary loss: 3.39955e-03
+[2023-12-07 18:41:33,482][Train][INFO] - total loss: 7.28795e-02
+[2023-12-07 18:41:33,541][Train][INFO] - step: 148
+[2023-12-07 18:41:33,541][Train][INFO] - pde loss: 2.47391e-02
+[2023-12-07 18:41:33,542][Train][INFO] - initial loss: 4.64978e-02
+[2023-12-07 18:41:33,542][Train][INFO] - boundary loss: 1.80804e-03
+[2023-12-07 18:41:33,542][Train][INFO] - total loss: 7.30449e-02
+[2023-12-07 18:41:33,597][Train][INFO] - step: 149
+[2023-12-07 18:41:33,597][Train][INFO] - pde loss: 2.84641e-02
+[2023-12-07 18:41:33,598][Train][INFO] - initial loss: 3.90331e-02
+[2023-12-07 18:41:33,598][Train][INFO] - boundary loss: 3.82093e-03
+[2023-12-07 18:41:33,598][Train][INFO] - total loss: 7.13182e-02
+[2023-12-07 18:41:33,655][Train][INFO] - step: 150
+[2023-12-07 18:41:33,656][Train][INFO] - pde loss: 2.58119e-02
+[2023-12-07 18:41:33,656][Train][INFO] - initial loss: 4.38728e-02
+[2023-12-07 18:41:33,656][Train][INFO] - boundary loss: 3.03668e-03
+[2023-12-07 18:41:33,657][Train][INFO] - total loss: 7.27214e-02
+[2023-12-07 18:41:33,713][Train][INFO] - step: 151
+[2023-12-07 18:41:33,714][Train][INFO] - pde loss: 2.32811e-02
+[2023-12-07 18:41:33,714][Train][INFO] - initial loss: 4.74027e-02
+[2023-12-07 18:41:33,714][Train][INFO] - boundary loss: 1.53253e-03
+[2023-12-07 18:41:33,715][Train][INFO] - total loss: 7.22164e-02
+[2023-12-07 18:41:33,775][Train][INFO] - step: 152
+[2023-12-07 18:41:33,776][Train][INFO] - pde loss: 2.54411e-02
+[2023-12-07 18:41:33,776][Train][INFO] - initial loss: 4.26981e-02
+[2023-12-07 18:41:33,776][Train][INFO] - boundary loss: 2.88526e-03
+[2023-12-07 18:41:33,776][Train][INFO] - total loss: 7.10245e-02
+[2023-12-07 18:41:33,831][Train][INFO] - step: 153
+[2023-12-07 18:41:33,831][Train][INFO] - pde loss: 2.59724e-02
+[2023-12-07 18:41:33,831][Train][INFO] - initial loss: 4.17614e-02
+[2023-12-07 18:41:33,832][Train][INFO] - boundary loss: 3.13582e-03
+[2023-12-07 18:41:33,832][Train][INFO] - total loss: 7.08696e-02
+[2023-12-07 18:41:33,891][Train][INFO] - step: 154
+[2023-12-07 18:41:33,891][Train][INFO] - pde loss: 2.55491e-02
+[2023-12-07 18:41:33,892][Train][INFO] - initial loss: 4.49368e-02
+[2023-12-07 18:41:33,892][Train][INFO] - boundary loss: 1.40016e-03
+[2023-12-07 18:41:33,892][Train][INFO] - total loss: 7.18861e-02
+[2023-12-07 18:41:33,946][Train][INFO] - step: 155
+[2023-12-07 18:41:33,947][Train][INFO] - pde loss: 2.83994e-02
+[2023-12-07 18:41:33,947][Train][INFO] - initial loss: 3.86690e-02
+[2023-12-07 18:41:33,947][Train][INFO] - boundary loss: 2.74491e-03
+[2023-12-07 18:41:33,947][Train][INFO] - total loss: 6.98134e-02
+[2023-12-07 18:41:34,001][Train][INFO] - step: 156
+[2023-12-07 18:41:34,002][Train][INFO] - pde loss: 2.65836e-02
+[2023-12-07 18:41:34,002][Train][INFO] - initial loss: 4.05047e-02
+[2023-12-07 18:41:34,003][Train][INFO] - boundary loss: 2.14021e-03
+[2023-12-07 18:41:34,003][Train][INFO] - total loss: 6.92284e-02
+[2023-12-07 18:41:34,059][Train][INFO] - step: 157
+[2023-12-07 18:41:34,059][Train][INFO] - pde loss: 2.55144e-02
+[2023-12-07 18:41:34,060][Train][INFO] - initial loss: 4.19562e-02
+[2023-12-07 18:41:34,060][Train][INFO] - boundary loss: 2.41871e-03
+[2023-12-07 18:41:34,060][Train][INFO] - total loss: 6.98892e-02
+[2023-12-07 18:41:34,117][Train][INFO] - step: 158
+[2023-12-07 18:41:34,117][Train][INFO] - pde loss: 2.13763e-02
+[2023-12-07 18:41:34,118][Train][INFO] - initial loss: 4.26339e-02
+[2023-12-07 18:41:34,118][Train][INFO] - boundary loss: 2.76581e-03
+[2023-12-07 18:41:34,118][Train][INFO] - total loss: 6.67760e-02
+[2023-12-07 18:41:34,175][Train][INFO] - step: 159
+[2023-12-07 18:41:34,175][Train][INFO] - pde loss: 2.23167e-02
+[2023-12-07 18:41:34,176][Train][INFO] - initial loss: 4.43570e-02
+[2023-12-07 18:41:34,176][Train][INFO] - boundary loss: 2.77062e-03
+[2023-12-07 18:41:34,176][Train][INFO] - total loss: 6.94443e-02
+[2023-12-07 18:41:34,230][Train][INFO] - step: 160
+[2023-12-07 18:41:34,230][Train][INFO] - pde loss: 2.24843e-02
+[2023-12-07 18:41:34,231][Train][INFO] - initial loss: 4.34088e-02
+[2023-12-07 18:41:34,231][Train][INFO] - boundary loss: 2.62565e-03
+[2023-12-07 18:41:34,231][Train][INFO] - total loss: 6.85188e-02
+[2023-12-07 18:41:34,284][Train][INFO] - step: 161
+[2023-12-07 18:41:34,284][Train][INFO] - pde loss: 2.50522e-02
+[2023-12-07 18:41:34,285][Train][INFO] - initial loss: 4.42257e-02
+[2023-12-07 18:41:34,285][Train][INFO] - boundary loss: 2.71758e-03
+[2023-12-07 18:41:34,285][Train][INFO] - total loss: 7.19955e-02
+[2023-12-07 18:41:34,339][Train][INFO] - step: 162
+[2023-12-07 18:41:34,340][Train][INFO] - pde loss: 2.28139e-02
+[2023-12-07 18:41:34,340][Train][INFO] - initial loss: 4.12562e-02
+[2023-12-07 18:41:34,340][Train][INFO] - boundary loss: 1.39760e-03
+[2023-12-07 18:41:34,342][Train][INFO] - total loss: 6.54677e-02
+[2023-12-07 18:41:34,395][Train][INFO] - step: 163
+[2023-12-07 18:41:34,395][Train][INFO] - pde loss: 2.51482e-02
+[2023-12-07 18:41:34,396][Train][INFO] - initial loss: 3.92532e-02
+[2023-12-07 18:41:34,396][Train][INFO] - boundary loss: 3.11882e-03
+[2023-12-07 18:41:34,396][Train][INFO] - total loss: 6.75202e-02
+[2023-12-07 18:41:34,455][Train][INFO] - step: 164
+[2023-12-07 18:41:34,456][Train][INFO] - pde loss: 3.01657e-02
+[2023-12-07 18:41:34,456][Train][INFO] - initial loss: 3.74665e-02
+[2023-12-07 18:41:34,456][Train][INFO] - boundary loss: 4.02698e-03
+[2023-12-07 18:41:34,457][Train][INFO] - total loss: 7.16591e-02
+[2023-12-07 18:41:34,513][Train][INFO] - step: 165
+[2023-12-07 18:41:34,514][Train][INFO] - pde loss: 2.50970e-02
+[2023-12-07 18:41:34,514][Train][INFO] - initial loss: 4.34687e-02
+[2023-12-07 18:41:34,514][Train][INFO] - boundary loss: 9.24578e-04
+[2023-12-07 18:41:34,516][Train][INFO] - total loss: 6.94902e-02
+[2023-12-07 18:41:34,571][Train][INFO] - step: 166
+[2023-12-07 18:41:34,572][Train][INFO] - pde loss: 2.88321e-02
+[2023-12-07 18:41:34,572][Train][INFO] - initial loss: 3.44221e-02
+[2023-12-07 18:41:34,572][Train][INFO] - boundary loss: 4.41721e-03
+[2023-12-07 18:41:34,573][Train][INFO] - total loss: 6.76714e-02
+[2023-12-07 18:41:34,629][Train][INFO] - step: 167
+[2023-12-07 18:41:34,629][Train][INFO] - pde loss: 2.71423e-02
+[2023-12-07 18:41:34,629][Train][INFO] - initial loss: 3.85171e-02
+[2023-12-07 18:41:34,630][Train][INFO] - boundary loss: 3.39445e-03
+[2023-12-07 18:41:34,630][Train][INFO] - total loss: 6.90539e-02
+[2023-12-07 18:41:34,683][Train][INFO] - step: 168
+[2023-12-07 18:41:34,684][Train][INFO] - pde loss: 2.00035e-02
+[2023-12-07 18:41:34,684][Train][INFO] - initial loss: 4.86044e-02
+[2023-12-07 18:41:34,684][Train][INFO] - boundary loss: 7.23807e-04
+[2023-12-07 18:41:34,685][Train][INFO] - total loss: 6.93317e-02
+[2023-12-07 18:41:34,740][Train][INFO] - step: 169
+[2023-12-07 18:41:34,740][Train][INFO] - pde loss: 2.31554e-02
+[2023-12-07 18:41:34,741][Train][INFO] - initial loss: 3.73167e-02
+[2023-12-07 18:41:34,741][Train][INFO] - boundary loss: 4.53039e-03
+[2023-12-07 18:41:34,742][Train][INFO] - total loss: 6.50026e-02
+[2023-12-07 18:41:34,797][Train][INFO] - step: 170
+[2023-12-07 18:41:34,797][Train][INFO] - pde loss: 2.46709e-02
+[2023-12-07 18:41:34,797][Train][INFO] - initial loss: 3.65705e-02
+[2023-12-07 18:41:34,798][Train][INFO] - boundary loss: 5.03791e-03
+[2023-12-07 18:41:34,798][Train][INFO] - total loss: 6.62794e-02
+[2023-12-07 18:41:34,851][Train][INFO] - step: 171
+[2023-12-07 18:41:34,851][Train][INFO] - pde loss: 1.98859e-02
+[2023-12-07 18:41:34,852][Train][INFO] - initial loss: 4.50685e-02
+[2023-12-07 18:41:34,852][Train][INFO] - boundary loss: 7.47209e-04
+[2023-12-07 18:41:34,853][Train][INFO] - total loss: 6.57017e-02
+[2023-12-07 18:41:34,908][Train][INFO] - step: 172
+[2023-12-07 18:41:34,909][Train][INFO] - pde loss: 2.29821e-02
+[2023-12-07 18:41:34,910][Train][INFO] - initial loss: 3.73203e-02
+[2023-12-07 18:41:34,910][Train][INFO] - boundary loss: 2.12166e-03
+[2023-12-07 18:41:34,910][Train][INFO] - total loss: 6.24241e-02
+[2023-12-07 18:41:34,964][Train][INFO] - step: 173
+[2023-12-07 18:41:34,964][Train][INFO] - pde loss: 2.57414e-02
+[2023-12-07 18:41:34,964][Train][INFO] - initial loss: 3.35376e-02
+[2023-12-07 18:41:34,965][Train][INFO] - boundary loss: 4.36936e-03
+[2023-12-07 18:41:34,965][Train][INFO] - total loss: 6.36483e-02
+[2023-12-07 18:41:35,018][Train][INFO] - step: 174
+[2023-12-07 18:41:35,018][Train][INFO] - pde loss: 2.10812e-02
+[2023-12-07 18:41:35,019][Train][INFO] - initial loss: 3.92855e-02
+[2023-12-07 18:41:35,019][Train][INFO] - boundary loss: 1.20398e-03
+[2023-12-07 18:41:35,019][Train][INFO] - total loss: 6.15707e-02
+[2023-12-07 18:41:35,076][Train][INFO] - step: 175
+[2023-12-07 18:41:35,076][Train][INFO] - pde loss: 2.53494e-02
+[2023-12-07 18:41:35,077][Train][INFO] - initial loss: 3.73433e-02
+[2023-12-07 18:41:35,077][Train][INFO] - boundary loss: 1.19849e-03
+[2023-12-07 18:41:35,077][Train][INFO] - total loss: 6.38912e-02
+[2023-12-07 18:41:35,137][Train][INFO] - step: 176
+[2023-12-07 18:41:35,138][Train][INFO] - pde loss: 2.88823e-02
+[2023-12-07 18:41:35,138][Train][INFO] - initial loss: 3.25753e-02
+[2023-12-07 18:41:35,138][Train][INFO] - boundary loss: 4.48367e-03
+[2023-12-07 18:41:35,139][Train][INFO] - total loss: 6.59412e-02
+[2023-12-07 18:41:35,196][Train][INFO] - step: 177
+[2023-12-07 18:41:35,196][Train][INFO] - pde loss: 2.20614e-02
+[2023-12-07 18:41:35,196][Train][INFO] - initial loss: 4.02058e-02
+[2023-12-07 18:41:35,197][Train][INFO] - boundary loss: 1.23127e-03
+[2023-12-07 18:41:35,197][Train][INFO] - total loss: 6.34985e-02
+[2023-12-07 18:41:35,257][Train][INFO] - step: 178
+[2023-12-07 18:41:35,257][Train][INFO] - pde loss: 2.18560e-02
+[2023-12-07 18:41:35,257][Train][INFO] - initial loss: 4.11565e-02
+[2023-12-07 18:41:35,259][Train][INFO] - boundary loss: 1.13861e-03
+[2023-12-07 18:41:35,259][Train][INFO] - total loss: 6.41511e-02
+[2023-12-07 18:41:35,313][Train][INFO] - step: 179
+[2023-12-07 18:41:35,314][Train][INFO] - pde loss: 2.37017e-02
+[2023-12-07 18:41:35,314][Train][INFO] - initial loss: 3.67265e-02
+[2023-12-07 18:41:35,314][Train][INFO] - boundary loss: 3.24432e-03
+[2023-12-07 18:41:35,315][Train][INFO] - total loss: 6.36725e-02
+[2023-12-07 18:41:35,371][Train][INFO] - step: 180
+[2023-12-07 18:41:35,372][Train][INFO] - pde loss: 2.29400e-02
+[2023-12-07 18:41:35,372][Train][INFO] - initial loss: 3.78256e-02
+[2023-12-07 18:41:35,372][Train][INFO] - boundary loss: 2.30089e-03
+[2023-12-07 18:41:35,373][Train][INFO] - total loss: 6.30665e-02
+[2023-12-07 18:41:35,431][Train][INFO] - step: 181
+[2023-12-07 18:41:35,432][Train][INFO] - pde loss: 2.03193e-02
+[2023-12-07 18:41:35,432][Train][INFO] - initial loss: 4.00439e-02
+[2023-12-07 18:41:35,432][Train][INFO] - boundary loss: 1.20960e-03
+[2023-12-07 18:41:35,433][Train][INFO] - total loss: 6.15729e-02
+[2023-12-07 18:41:35,491][Train][INFO] - step: 182
+[2023-12-07 18:41:35,491][Train][INFO] - pde loss: 2.27360e-02
+[2023-12-07 18:41:35,492][Train][INFO] - initial loss: 3.56163e-02
+[2023-12-07 18:41:35,492][Train][INFO] - boundary loss: 3.16908e-03
+[2023-12-07 18:41:35,492][Train][INFO] - total loss: 6.15214e-02
+[2023-12-07 18:41:35,547][Train][INFO] - step: 183
+[2023-12-07 18:41:35,547][Train][INFO] - pde loss: 2.37566e-02
+[2023-12-07 18:41:35,547][Train][INFO] - initial loss: 3.42568e-02
+[2023-12-07 18:41:35,547][Train][INFO] - boundary loss: 3.29534e-03
+[2023-12-07 18:41:35,548][Train][INFO] - total loss: 6.13088e-02
+[2023-12-07 18:41:35,602][Train][INFO] - step: 184
+[2023-12-07 18:41:35,602][Train][INFO] - pde loss: 2.23427e-02
+[2023-12-07 18:41:35,603][Train][INFO] - initial loss: 3.99922e-02
+[2023-12-07 18:41:35,603][Train][INFO] - boundary loss: 9.83965e-04
+[2023-12-07 18:41:35,603][Train][INFO] - total loss: 6.33189e-02
+[2023-12-07 18:41:35,658][Train][INFO] - step: 185
+[2023-12-07 18:41:35,660][Train][INFO] - pde loss: 2.25208e-02
+[2023-12-07 18:41:35,660][Train][INFO] - initial loss: 3.37351e-02
+[2023-12-07 18:41:35,660][Train][INFO] - boundary loss: 2.44021e-03
+[2023-12-07 18:41:35,660][Train][INFO] - total loss: 5.86961e-02
+[2023-12-07 18:41:35,712][Train][INFO] - step: 186
+[2023-12-07 18:41:35,713][Train][INFO] - pde loss: 2.37308e-02
+[2023-12-07 18:41:35,713][Train][INFO] - initial loss: 3.22492e-02
+[2023-12-07 18:41:35,713][Train][INFO] - boundary loss: 2.93047e-03
+[2023-12-07 18:41:35,713][Train][INFO] - total loss: 5.89105e-02
+[2023-12-07 18:41:35,767][Train][INFO] - step: 187
+[2023-12-07 18:41:35,767][Train][INFO] - pde loss: 2.35502e-02
+[2023-12-07 18:41:35,767][Train][INFO] - initial loss: 3.56917e-02
+[2023-12-07 18:41:35,768][Train][INFO] - boundary loss: 1.66120e-03
+[2023-12-07 18:41:35,769][Train][INFO] - total loss: 6.09031e-02
+[2023-12-07 18:41:35,826][Train][INFO] - step: 188
+[2023-12-07 18:41:35,826][Train][INFO] - pde loss: 2.20531e-02
+[2023-12-07 18:41:35,827][Train][INFO] - initial loss: 3.51343e-02
+[2023-12-07 18:41:35,827][Train][INFO] - boundary loss: 1.65393e-03
+[2023-12-07 18:41:35,827][Train][INFO] - total loss: 5.88414e-02
+[2023-12-07 18:41:35,881][Train][INFO] - step: 189
+[2023-12-07 18:41:35,882][Train][INFO] - pde loss: 2.35683e-02
+[2023-12-07 18:41:35,882][Train][INFO] - initial loss: 3.29271e-02
+[2023-12-07 18:41:35,882][Train][INFO] - boundary loss: 3.00073e-03
+[2023-12-07 18:41:35,883][Train][INFO] - total loss: 5.94962e-02
+[2023-12-07 18:41:35,938][Train][INFO] - step: 190
+[2023-12-07 18:41:35,938][Train][INFO] - pde loss: 2.15086e-02
+[2023-12-07 18:41:35,939][Train][INFO] - initial loss: 3.32388e-02
+[2023-12-07 18:41:35,939][Train][INFO] - boundary loss: 2.72669e-03
+[2023-12-07 18:41:35,939][Train][INFO] - total loss: 5.74741e-02
+[2023-12-07 18:41:35,996][Train][INFO] - step: 191
+[2023-12-07 18:41:35,996][Train][INFO] - pde loss: 1.94970e-02
+[2023-12-07 18:41:35,996][Train][INFO] - initial loss: 3.55831e-02
+[2023-12-07 18:41:35,997][Train][INFO] - boundary loss: 1.43561e-03
+[2023-12-07 18:41:35,997][Train][INFO] - total loss: 5.65157e-02
+[2023-12-07 18:41:36,050][Train][INFO] - step: 192
+[2023-12-07 18:41:36,050][Train][INFO] - pde loss: 1.88476e-02
+[2023-12-07 18:41:36,050][Train][INFO] - initial loss: 3.32546e-02
+[2023-12-07 18:41:36,051][Train][INFO] - boundary loss: 1.95213e-03
+[2023-12-07 18:41:36,051][Train][INFO] - total loss: 5.40543e-02
+[2023-12-07 18:41:36,108][Train][INFO] - step: 193
+[2023-12-07 18:41:36,108][Train][INFO] - pde loss: 2.43491e-02
+[2023-12-07 18:41:36,109][Train][INFO] - initial loss: 3.04345e-02
+[2023-12-07 18:41:36,109][Train][INFO] - boundary loss: 3.89782e-03
+[2023-12-07 18:41:36,109][Train][INFO] - total loss: 5.86814e-02
+[2023-12-07 18:41:36,162][Train][INFO] - step: 194
+[2023-12-07 18:41:36,162][Train][INFO] - pde loss: 2.05059e-02
+[2023-12-07 18:41:36,162][Train][INFO] - initial loss: 3.51868e-02
+[2023-12-07 18:41:36,162][Train][INFO] - boundary loss: 1.89574e-03
+[2023-12-07 18:41:36,163][Train][INFO] - total loss: 5.75884e-02
+[2023-12-07 18:41:36,217][Train][INFO] - step: 195
+[2023-12-07 18:41:36,217][Train][INFO] - pde loss: 2.04671e-02
+[2023-12-07 18:41:36,218][Train][INFO] - initial loss: 3.38118e-02
+[2023-12-07 18:41:36,218][Train][INFO] - boundary loss: 1.25356e-03
+[2023-12-07 18:41:36,218][Train][INFO] - total loss: 5.55325e-02
+[2023-12-07 18:41:36,274][Train][INFO] - step: 196
+[2023-12-07 18:41:36,274][Train][INFO] - pde loss: 2.20156e-02
+[2023-12-07 18:41:36,275][Train][INFO] - initial loss: 2.92919e-02
+[2023-12-07 18:41:36,275][Train][INFO] - boundary loss: 3.44031e-03
+[2023-12-07 18:41:36,275][Train][INFO] - total loss: 5.47479e-02
+[2023-12-07 18:41:36,329][Train][INFO] - step: 197
+[2023-12-07 18:41:36,330][Train][INFO] - pde loss: 2.29486e-02
+[2023-12-07 18:41:36,331][Train][INFO] - initial loss: 3.61339e-02
+[2023-12-07 18:41:36,331][Train][INFO] - boundary loss: 2.34194e-03
+[2023-12-07 18:41:36,331][Train][INFO] - total loss: 6.14244e-02
+[2023-12-07 18:41:36,389][Train][INFO] - step: 198
+[2023-12-07 18:41:36,389][Train][INFO] - pde loss: 2.50514e-02
+[2023-12-07 18:41:36,389][Train][INFO] - initial loss: 3.53292e-02
+[2023-12-07 18:41:36,389][Train][INFO] - boundary loss: 1.45352e-03
+[2023-12-07 18:41:36,390][Train][INFO] - total loss: 6.18341e-02
+[2023-12-07 18:41:36,449][Train][INFO] - step: 199
+[2023-12-07 18:41:36,450][Train][INFO] - pde loss: 2.15164e-02
+[2023-12-07 18:41:36,450][Train][INFO] - initial loss: 3.00164e-02
+[2023-12-07 18:41:36,450][Train][INFO] - boundary loss: 2.57754e-03
+[2023-12-07 18:41:36,451][Train][INFO] - total loss: 5.41103e-02
+[2023-12-07 18:41:36,515][Train][INFO] - step: 200
+[2023-12-07 18:41:36,515][Train][INFO] - pde loss: 2.52785e-02
+[2023-12-07 18:41:36,516][Train][INFO] - initial loss: 3.29396e-02
+[2023-12-07 18:41:36,516][Train][INFO] - boundary loss: 3.85791e-03
+[2023-12-07 18:41:36,516][Train][INFO] - total loss: 6.20759e-02
+[2023-12-07 18:41:36,581][Train][INFO] - step: 201
+[2023-12-07 18:41:36,581][Train][INFO] - pde loss: 2.51454e-02
+[2023-12-07 18:41:36,582][Train][INFO] - initial loss: 3.56093e-02
+[2023-12-07 18:41:36,582][Train][INFO] - boundary loss: 9.21207e-04
+[2023-12-07 18:41:36,583][Train][INFO] - total loss: 6.16758e-02
+[2023-12-07 18:41:36,646][Train][INFO] - step: 202
+[2023-12-07 18:41:36,647][Train][INFO] - pde loss: 2.19390e-02
+[2023-12-07 18:41:36,647][Train][INFO] - initial loss: 3.14102e-02
+[2023-12-07 18:41:36,647][Train][INFO] - boundary loss: 1.78652e-03
+[2023-12-07 18:41:36,648][Train][INFO] - total loss: 5.51358e-02
+[2023-12-07 18:41:36,701][Train][INFO] - step: 203
+[2023-12-07 18:41:36,701][Train][INFO] - pde loss: 2.49559e-02
+[2023-12-07 18:41:36,701][Train][INFO] - initial loss: 2.92681e-02
+[2023-12-07 18:41:36,702][Train][INFO] - boundary loss: 4.33079e-03
+[2023-12-07 18:41:36,702][Train][INFO] - total loss: 5.85548e-02
+[2023-12-07 18:41:36,757][Train][INFO] - step: 204
+[2023-12-07 18:41:36,758][Train][INFO] - pde loss: 2.29507e-02
+[2023-12-07 18:41:36,758][Train][INFO] - initial loss: 3.32907e-02
+[2023-12-07 18:41:36,758][Train][INFO] - boundary loss: 1.57585e-03
+[2023-12-07 18:41:36,759][Train][INFO] - total loss: 5.78172e-02
+[2023-12-07 18:41:36,814][Train][INFO] - step: 205
+[2023-12-07 18:41:36,814][Train][INFO] - pde loss: 2.03003e-02
+[2023-12-07 18:41:36,814][Train][INFO] - initial loss: 3.37896e-02
+[2023-12-07 18:41:36,815][Train][INFO] - boundary loss: 6.94813e-04
+[2023-12-07 18:41:36,815][Train][INFO] - total loss: 5.47847e-02
+[2023-12-07 18:41:36,867][Train][INFO] - step: 206
+[2023-12-07 18:41:36,868][Train][INFO] - pde loss: 2.27629e-02
+[2023-12-07 18:41:36,868][Train][INFO] - initial loss: 2.86669e-02
+[2023-12-07 18:41:36,868][Train][INFO] - boundary loss: 3.43643e-03
+[2023-12-07 18:41:36,869][Train][INFO] - total loss: 5.48662e-02
+[2023-12-07 18:41:36,924][Train][INFO] - step: 207
+[2023-12-07 18:41:36,924][Train][INFO] - pde loss: 2.23638e-02
+[2023-12-07 18:41:36,925][Train][INFO] - initial loss: 2.83704e-02
+[2023-12-07 18:41:36,925][Train][INFO] - boundary loss: 2.38496e-03
+[2023-12-07 18:41:36,925][Train][INFO] - total loss: 5.31191e-02
+[2023-12-07 18:41:36,979][Train][INFO] - step: 208
+[2023-12-07 18:41:36,980][Train][INFO] - pde loss: 2.09002e-02
+[2023-12-07 18:41:36,980][Train][INFO] - initial loss: 3.62163e-02
+[2023-12-07 18:41:36,980][Train][INFO] - boundary loss: 9.32360e-04
+[2023-12-07 18:41:36,981][Train][INFO] - total loss: 5.80488e-02
+[2023-12-07 18:41:37,034][Train][INFO] - step: 209
+[2023-12-07 18:41:37,035][Train][INFO] - pde loss: 2.02778e-02
+[2023-12-07 18:41:37,035][Train][INFO] - initial loss: 3.14988e-02
+[2023-12-07 18:41:37,035][Train][INFO] - boundary loss: 2.39287e-03
+[2023-12-07 18:41:37,036][Train][INFO] - total loss: 5.41694e-02
+[2023-12-07 18:41:37,088][Train][INFO] - step: 210
+[2023-12-07 18:41:37,089][Train][INFO] - pde loss: 2.13403e-02
+[2023-12-07 18:41:37,089][Train][INFO] - initial loss: 2.77770e-02
+[2023-12-07 18:41:37,089][Train][INFO] - boundary loss: 3.94901e-03
+[2023-12-07 18:41:37,089][Train][INFO] - total loss: 5.30663e-02
+[2023-12-07 18:41:37,144][Train][INFO] - step: 211
+[2023-12-07 18:41:37,145][Train][INFO] - pde loss: 1.87961e-02
+[2023-12-07 18:41:37,145][Train][INFO] - initial loss: 3.15323e-02
+[2023-12-07 18:41:37,145][Train][INFO] - boundary loss: 1.46532e-03
+[2023-12-07 18:41:37,146][Train][INFO] - total loss: 5.17937e-02
+[2023-12-07 18:41:37,200][Train][INFO] - step: 212
+[2023-12-07 18:41:37,200][Train][INFO] - pde loss: 1.90831e-02
+[2023-12-07 18:41:37,200][Train][INFO] - initial loss: 3.41542e-02
+[2023-12-07 18:41:37,201][Train][INFO] - boundary loss: 1.31985e-03
+[2023-12-07 18:41:37,201][Train][INFO] - total loss: 5.45572e-02
+[2023-12-07 18:41:37,255][Train][INFO] - step: 213
+[2023-12-07 18:41:37,256][Train][INFO] - pde loss: 2.21555e-02
+[2023-12-07 18:41:37,256][Train][INFO] - initial loss: 2.79769e-02
+[2023-12-07 18:41:37,256][Train][INFO] - boundary loss: 4.51952e-03
+[2023-12-07 18:41:37,257][Train][INFO] - total loss: 5.46520e-02
+[2023-12-07 18:41:37,311][Train][INFO] - step: 214
+[2023-12-07 18:41:37,311][Train][INFO] - pde loss: 2.11043e-02
+[2023-12-07 18:41:37,312][Train][INFO] - initial loss: 2.94334e-02
+[2023-12-07 18:41:37,312][Train][INFO] - boundary loss: 1.59791e-03
+[2023-12-07 18:41:37,313][Train][INFO] - total loss: 5.21356e-02
+[2023-12-07 18:41:37,367][Train][INFO] - step: 215
+[2023-12-07 18:41:37,367][Train][INFO] - pde loss: 1.95982e-02
+[2023-12-07 18:41:37,368][Train][INFO] - initial loss: 3.35413e-02
+[2023-12-07 18:41:37,368][Train][INFO] - boundary loss: 8.56658e-04
+[2023-12-07 18:41:37,368][Train][INFO] - total loss: 5.39962e-02
+[2023-12-07 18:41:37,425][Train][INFO] - step: 216
+[2023-12-07 18:41:37,425][Train][INFO] - pde loss: 2.44051e-02
+[2023-12-07 18:41:37,425][Train][INFO] - initial loss: 2.70270e-02
+[2023-12-07 18:41:37,426][Train][INFO] - boundary loss: 3.01171e-03
+[2023-12-07 18:41:37,426][Train][INFO] - total loss: 5.44438e-02
+[2023-12-07 18:41:37,479][Train][INFO] - step: 217
+[2023-12-07 18:41:37,479][Train][INFO] - pde loss: 2.20088e-02
+[2023-12-07 18:41:37,479][Train][INFO] - initial loss: 2.64755e-02
+[2023-12-07 18:41:37,479][Train][INFO] - boundary loss: 1.96342e-03
+[2023-12-07 18:41:37,481][Train][INFO] - total loss: 5.04477e-02
+[2023-12-07 18:41:37,535][Train][INFO] - step: 218
+[2023-12-07 18:41:37,536][Train][INFO] - pde loss: 2.11485e-02
+[2023-12-07 18:41:37,536][Train][INFO] - initial loss: 3.11035e-02
+[2023-12-07 18:41:37,536][Train][INFO] - boundary loss: 7.26715e-04
+[2023-12-07 18:41:37,537][Train][INFO] - total loss: 5.29787e-02
+[2023-12-07 18:41:37,593][Train][INFO] - step: 219
+[2023-12-07 18:41:37,594][Train][INFO] - pde loss: 1.95241e-02
+[2023-12-07 18:41:37,594][Train][INFO] - initial loss: 3.00467e-02
+[2023-12-07 18:41:37,594][Train][INFO] - boundary loss: 1.99986e-03
+[2023-12-07 18:41:37,595][Train][INFO] - total loss: 5.15707e-02
+[2023-12-07 18:41:37,648][Train][INFO] - step: 220
+[2023-12-07 18:41:37,649][Train][INFO] - pde loss: 2.10315e-02
+[2023-12-07 18:41:37,649][Train][INFO] - initial loss: 2.90965e-02
+[2023-12-07 18:41:37,650][Train][INFO] - boundary loss: 3.00729e-03
+[2023-12-07 18:41:37,650][Train][INFO] - total loss: 5.31352e-02
+[2023-12-07 18:41:37,707][Train][INFO] - step: 221
+[2023-12-07 18:41:37,707][Train][INFO] - pde loss: 1.89290e-02
+[2023-12-07 18:41:37,707][Train][INFO] - initial loss: 2.99128e-02
+[2023-12-07 18:41:37,707][Train][INFO] - boundary loss: 1.33755e-03
+[2023-12-07 18:41:37,708][Train][INFO] - total loss: 5.01793e-02
+[2023-12-07 18:41:37,773][Train][INFO] - step: 222
+[2023-12-07 18:41:37,773][Train][INFO] - pde loss: 1.71614e-02
+[2023-12-07 18:41:37,773][Train][INFO] - initial loss: 3.08198e-02
+[2023-12-07 18:41:37,774][Train][INFO] - boundary loss: 9.06619e-04
+[2023-12-07 18:41:37,774][Train][INFO] - total loss: 4.88879e-02
+[2023-12-07 18:41:37,829][Train][INFO] - step: 223
+[2023-12-07 18:41:37,829][Train][INFO] - pde loss: 2.02076e-02
+[2023-12-07 18:41:37,829][Train][INFO] - initial loss: 2.64990e-02
+[2023-12-07 18:41:37,829][Train][INFO] - boundary loss: 3.34812e-03
+[2023-12-07 18:41:37,830][Train][INFO] - total loss: 5.00547e-02
+[2023-12-07 18:41:37,882][Train][INFO] - step: 224
+[2023-12-07 18:41:37,883][Train][INFO] - pde loss: 2.06418e-02
+[2023-12-07 18:41:37,883][Train][INFO] - initial loss: 2.54595e-02
+[2023-12-07 18:41:37,883][Train][INFO] - boundary loss: 2.39721e-03
+[2023-12-07 18:41:37,884][Train][INFO] - total loss: 4.84985e-02
+[2023-12-07 18:41:37,940][Train][INFO] - step: 225
+[2023-12-07 18:41:37,941][Train][INFO] - pde loss: 1.88452e-02
+[2023-12-07 18:41:37,941][Train][INFO] - initial loss: 3.18304e-02
+[2023-12-07 18:41:37,941][Train][INFO] - boundary loss: 7.51884e-04
+[2023-12-07 18:41:37,942][Train][INFO] - total loss: 5.14275e-02
+[2023-12-07 18:41:37,996][Train][INFO] - step: 226
+[2023-12-07 18:41:37,996][Train][INFO] - pde loss: 2.08657e-02
+[2023-12-07 18:41:37,998][Train][INFO] - initial loss: 2.82469e-02
+[2023-12-07 18:41:37,998][Train][INFO] - boundary loss: 1.97129e-03
+[2023-12-07 18:41:37,998][Train][INFO] - total loss: 5.10839e-02
+[2023-12-07 18:41:38,051][Train][INFO] - step: 227
+[2023-12-07 18:41:38,051][Train][INFO] - pde loss: 2.12897e-02
+[2023-12-07 18:41:38,052][Train][INFO] - initial loss: 2.39030e-02
+[2023-12-07 18:41:38,052][Train][INFO] - boundary loss: 4.10967e-03
+[2023-12-07 18:41:38,052][Train][INFO] - total loss: 4.93023e-02
+[2023-12-07 18:41:38,108][Train][INFO] - step: 228
+[2023-12-07 18:41:38,108][Train][INFO] - pde loss: 2.06059e-02
+[2023-12-07 18:41:38,109][Train][INFO] - initial loss: 3.02601e-02
+[2023-12-07 18:41:38,109][Train][INFO] - boundary loss: 8.82877e-04
+[2023-12-07 18:41:38,109][Train][INFO] - total loss: 5.17490e-02
+[2023-12-07 18:41:38,165][Train][INFO] - step: 229
+[2023-12-07 18:41:38,165][Train][INFO] - pde loss: 2.15141e-02
+[2023-12-07 18:41:38,166][Train][INFO] - initial loss: 2.78794e-02
+[2023-12-07 18:41:38,166][Train][INFO] - boundary loss: 1.16314e-03
+[2023-12-07 18:41:38,166][Train][INFO] - total loss: 5.05567e-02
+[2023-12-07 18:41:38,224][Train][INFO] - step: 230
+[2023-12-07 18:41:38,225][Train][INFO] - pde loss: 2.22798e-02
+[2023-12-07 18:41:38,225][Train][INFO] - initial loss: 2.48554e-02
+[2023-12-07 18:41:38,225][Train][INFO] - boundary loss: 3.98519e-03
+[2023-12-07 18:41:38,226][Train][INFO] - total loss: 5.11203e-02
+[2023-12-07 18:41:38,281][Train][INFO] - step: 231
+[2023-12-07 18:41:38,281][Train][INFO] - pde loss: 1.91959e-02
+[2023-12-07 18:41:38,281][Train][INFO] - initial loss: 2.58465e-02
+[2023-12-07 18:41:38,283][Train][INFO] - boundary loss: 1.65968e-03
+[2023-12-07 18:41:38,283][Train][INFO] - total loss: 4.67021e-02
+[2023-12-07 18:41:38,341][Train][INFO] - step: 232
+[2023-12-07 18:41:38,341][Train][INFO] - pde loss: 1.55197e-02
+[2023-12-07 18:41:38,341][Train][INFO] - initial loss: 3.08514e-02
+[2023-12-07 18:41:38,342][Train][INFO] - boundary loss: 8.66931e-04
+[2023-12-07 18:41:38,342][Train][INFO] - total loss: 4.72380e-02
+[2023-12-07 18:41:38,397][Train][INFO] - step: 233
+[2023-12-07 18:41:38,397][Train][INFO] - pde loss: 2.03367e-02
+[2023-12-07 18:41:38,397][Train][INFO] - initial loss: 2.57551e-02
+[2023-12-07 18:41:38,398][Train][INFO] - boundary loss: 3.06712e-03
+[2023-12-07 18:41:38,398][Train][INFO] - total loss: 4.91590e-02
+[2023-12-07 18:41:38,451][Train][INFO] - step: 234
+[2023-12-07 18:41:38,451][Train][INFO] - pde loss: 2.12839e-02
+[2023-12-07 18:41:38,452][Train][INFO] - initial loss: 2.45712e-02
+[2023-12-07 18:41:38,452][Train][INFO] - boundary loss: 2.94859e-03
+[2023-12-07 18:41:38,452][Train][INFO] - total loss: 4.88036e-02
+[2023-12-07 18:41:38,507][Train][INFO] - step: 235
+[2023-12-07 18:41:38,508][Train][INFO] - pde loss: 1.69822e-02
+[2023-12-07 18:41:38,508][Train][INFO] - initial loss: 3.05858e-02
+[2023-12-07 18:41:38,508][Train][INFO] - boundary loss: 7.31003e-04
+[2023-12-07 18:41:38,509][Train][INFO] - total loss: 4.82989e-02
+[2023-12-07 18:41:38,565][Train][INFO] - step: 236
+[2023-12-07 18:41:38,566][Train][INFO] - pde loss: 1.84177e-02
+[2023-12-07 18:41:38,566][Train][INFO] - initial loss: 2.78038e-02
+[2023-12-07 18:41:38,566][Train][INFO] - boundary loss: 1.35182e-03
+[2023-12-07 18:41:38,566][Train][INFO] - total loss: 4.75734e-02
+[2023-12-07 18:41:38,625][Train][INFO] - step: 237
+[2023-12-07 18:41:38,625][Train][INFO] - pde loss: 2.10526e-02
+[2023-12-07 18:41:38,626][Train][INFO] - initial loss: 2.57921e-02
+[2023-12-07 18:41:38,626][Train][INFO] - boundary loss: 3.49173e-03
+[2023-12-07 18:41:38,626][Train][INFO] - total loss: 5.03364e-02
+[2023-12-07 18:41:38,681][Train][INFO] - step: 238
+[2023-12-07 18:41:38,681][Train][INFO] - pde loss: 1.79245e-02
+[2023-12-07 18:41:38,682][Train][INFO] - initial loss: 2.44679e-02
+[2023-12-07 18:41:38,682][Train][INFO] - boundary loss: 1.54522e-03
+[2023-12-07 18:41:38,682][Train][INFO] - total loss: 4.39376e-02
+[2023-12-07 18:41:38,740][Train][INFO] - step: 239
+[2023-12-07 18:41:38,741][Train][INFO] - pde loss: 1.69163e-02
+[2023-12-07 18:41:38,741][Train][INFO] - initial loss: 2.76399e-02
+[2023-12-07 18:41:38,741][Train][INFO] - boundary loss: 7.74435e-04
+[2023-12-07 18:41:38,742][Train][INFO] - total loss: 4.53306e-02
+[2023-12-07 18:41:38,796][Train][INFO] - step: 240
+[2023-12-07 18:41:38,796][Train][INFO] - pde loss: 1.90151e-02
+[2023-12-07 18:41:38,797][Train][INFO] - initial loss: 2.43844e-02
+[2023-12-07 18:41:38,797][Train][INFO] - boundary loss: 1.85934e-03
+[2023-12-07 18:41:38,797][Train][INFO] - total loss: 4.52589e-02
+[2023-12-07 18:41:38,852][Train][INFO] - step: 241
+[2023-12-07 18:41:38,852][Train][INFO] - pde loss: 1.96885e-02
+[2023-12-07 18:41:38,852][Train][INFO] - initial loss: 2.21315e-02
+[2023-12-07 18:41:38,853][Train][INFO] - boundary loss: 3.15146e-03
+[2023-12-07 18:41:38,853][Train][INFO] - total loss: 4.49714e-02
+[2023-12-07 18:41:38,908][Train][INFO] - step: 242
+[2023-12-07 18:41:38,908][Train][INFO] - pde loss: 2.19523e-02
+[2023-12-07 18:41:38,909][Train][INFO] - initial loss: 2.50958e-02
+[2023-12-07 18:41:38,909][Train][INFO] - boundary loss: 1.25962e-03
+[2023-12-07 18:41:38,909][Train][INFO] - total loss: 4.83077e-02
+[2023-12-07 18:41:38,962][Train][INFO] - step: 243
+[2023-12-07 18:41:38,964][Train][INFO] - pde loss: 1.73378e-02
+[2023-12-07 18:41:38,964][Train][INFO] - initial loss: 2.99918e-02
+[2023-12-07 18:41:38,964][Train][INFO] - boundary loss: 1.55220e-03
+[2023-12-07 18:41:38,965][Train][INFO] - total loss: 4.88818e-02
+[2023-12-07 18:41:39,019][Train][INFO] - step: 244
+[2023-12-07 18:41:39,019][Train][INFO] - pde loss: 2.07450e-02
+[2023-12-07 18:41:39,019][Train][INFO] - initial loss: 2.26464e-02
+[2023-12-07 18:41:39,019][Train][INFO] - boundary loss: 4.40857e-03
+[2023-12-07 18:41:39,020][Train][INFO] - total loss: 4.78000e-02
+[2023-12-07 18:41:39,077][Train][INFO] - step: 245
+[2023-12-07 18:41:39,077][Train][INFO] - pde loss: 1.66779e-02
+[2023-12-07 18:41:39,078][Train][INFO] - initial loss: 2.41172e-02
+[2023-12-07 18:41:39,078][Train][INFO] - boundary loss: 1.78500e-03
+[2023-12-07 18:41:39,078][Train][INFO] - total loss: 4.25801e-02
+[2023-12-07 18:41:39,133][Train][INFO] - step: 246
+[2023-12-07 18:41:39,133][Train][INFO] - pde loss: 1.72992e-02
+[2023-12-07 18:41:39,134][Train][INFO] - initial loss: 3.12105e-02
+[2023-12-07 18:41:39,134][Train][INFO] - boundary loss: 1.22433e-03
+[2023-12-07 18:41:39,134][Train][INFO] - total loss: 4.97340e-02
+[2023-12-07 18:41:39,193][Train][INFO] - step: 247
+[2023-12-07 18:41:39,194][Train][INFO] - pde loss: 2.13183e-02
+[2023-12-07 18:41:39,194][Train][INFO] - initial loss: 2.49698e-02
+[2023-12-07 18:41:39,194][Train][INFO] - boundary loss: 4.20309e-03
+[2023-12-07 18:41:39,195][Train][INFO] - total loss: 5.04911e-02
+[2023-12-07 18:41:39,250][Train][INFO] - step: 248
+[2023-12-07 18:41:39,250][Train][INFO] - pde loss: 1.90001e-02
+[2023-12-07 18:41:39,250][Train][INFO] - initial loss: 2.54939e-02
+[2023-12-07 18:41:39,251][Train][INFO] - boundary loss: 2.96130e-03
+[2023-12-07 18:41:39,251][Train][INFO] - total loss: 4.74552e-02
+[2023-12-07 18:41:39,309][Train][INFO] - step: 249
+[2023-12-07 18:41:39,310][Train][INFO] - pde loss: 1.65926e-02
+[2023-12-07 18:41:39,310][Train][INFO] - initial loss: 2.73517e-02
+[2023-12-07 18:41:39,310][Train][INFO] - boundary loss: 1.09852e-03
+[2023-12-07 18:41:39,311][Train][INFO] - total loss: 4.50428e-02
+[2023-12-07 18:41:39,365][Train][INFO] - step: 250
+[2023-12-07 18:41:39,365][Train][INFO] - pde loss: 1.92485e-02
+[2023-12-07 18:41:39,366][Train][INFO] - initial loss: 2.34108e-02
+[2023-12-07 18:41:39,366][Train][INFO] - boundary loss: 1.15746e-03
+[2023-12-07 18:41:39,366][Train][INFO] - total loss: 4.38168e-02
+[2023-12-07 18:41:39,368][Train][INFO] - evaluation
+[2023-12-07 18:41:39,373][Train][INFO] - train area: peak error:5.3252e-01, absolute error:1.1799e-01, l2 error:2.7136e-02
+[2023-12-07 18:41:39,374][Train][INFO] - eval area: peak error:5.0896e-01, absolute error:5.5082e-02, l2 error:1.0312e-02
+[2023-12-07 18:41:39,377][Train][INFO] - test area: peak error:5.3887e-01, absolute error:8.0427e-02, l2 error:1.6232e-02
+[2023-12-07 18:41:39,439][Train][INFO] - step: 251
+[2023-12-07 18:41:39,439][Train][INFO] - pde loss: 2.02196e-02
+[2023-12-07 18:41:39,439][Train][INFO] - initial loss: 2.26889e-02
+[2023-12-07 18:41:39,440][Train][INFO] - boundary loss: 2.68984e-03
+[2023-12-07 18:41:39,440][Train][INFO] - total loss: 4.55984e-02
+[2023-12-07 18:41:39,496][Train][INFO] - step: 252
+[2023-12-07 18:41:39,496][Train][INFO] - pde loss: 1.72679e-02
+[2023-12-07 18:41:39,496][Train][INFO] - initial loss: 2.14365e-02
+[2023-12-07 18:41:39,497][Train][INFO] - boundary loss: 2.17637e-03
+[2023-12-07 18:41:39,497][Train][INFO] - total loss: 4.08807e-02
+[2023-12-07 18:41:39,555][Train][INFO] - step: 253
+[2023-12-07 18:41:39,556][Train][INFO] - pde loss: 1.72768e-02
+[2023-12-07 18:41:39,556][Train][INFO] - initial loss: 2.64001e-02
+[2023-12-07 18:41:39,556][Train][INFO] - boundary loss: 7.31362e-04
+[2023-12-07 18:41:39,557][Train][INFO] - total loss: 4.44082e-02
+[2023-12-07 18:41:39,612][Train][INFO] - step: 254
+[2023-12-07 18:41:39,612][Train][INFO] - pde loss: 2.07129e-02
+[2023-12-07 18:41:39,612][Train][INFO] - initial loss: 2.56165e-02
+[2023-12-07 18:41:39,613][Train][INFO] - boundary loss: 1.49725e-03
+[2023-12-07 18:41:39,613][Train][INFO] - total loss: 4.78267e-02
+[2023-12-07 18:41:39,669][Train][INFO] - step: 255
+[2023-12-07 18:41:39,670][Train][INFO] - pde loss: 2.30003e-02
+[2023-12-07 18:41:39,670][Train][INFO] - initial loss: 2.14118e-02
+[2023-12-07 18:41:39,670][Train][INFO] - boundary loss: 3.41052e-03
+[2023-12-07 18:41:39,670][Train][INFO] - total loss: 4.78226e-02
+[2023-12-07 18:41:39,723][Train][INFO] - step: 256
+[2023-12-07 18:41:39,724][Train][INFO] - pde loss: 1.54398e-02
+[2023-12-07 18:41:39,724][Train][INFO] - initial loss: 2.69736e-02
+[2023-12-07 18:41:39,724][Train][INFO] - boundary loss: 1.14245e-03
+[2023-12-07 18:41:39,724][Train][INFO] - total loss: 4.35559e-02
+[2023-12-07 18:41:39,779][Train][INFO] - step: 257
+[2023-12-07 18:41:39,779][Train][INFO] - pde loss: 1.44243e-02
+[2023-12-07 18:41:39,779][Train][INFO] - initial loss: 2.59622e-02
+[2023-12-07 18:41:39,780][Train][INFO] - boundary loss: 1.30067e-03
+[2023-12-07 18:41:39,780][Train][INFO] - total loss: 4.16872e-02
+[2023-12-07 18:41:39,834][Train][INFO] - step: 258
+[2023-12-07 18:41:39,834][Train][INFO] - pde loss: 1.77209e-02
+[2023-12-07 18:41:39,834][Train][INFO] - initial loss: 2.22409e-02
+[2023-12-07 18:41:39,835][Train][INFO] - boundary loss: 3.92880e-03
+[2023-12-07 18:41:39,835][Train][INFO] - total loss: 4.38906e-02
+[2023-12-07 18:41:39,890][Train][INFO] - step: 259
+[2023-12-07 18:41:39,890][Train][INFO] - pde loss: 1.64896e-02
+[2023-12-07 18:41:39,890][Train][INFO] - initial loss: 2.23383e-02
+[2023-12-07 18:41:39,891][Train][INFO] - boundary loss: 1.62782e-03
+[2023-12-07 18:41:39,891][Train][INFO] - total loss: 4.04557e-02
+[2023-12-07 18:41:39,945][Train][INFO] - step: 260
+[2023-12-07 18:41:39,945][Train][INFO] - pde loss: 1.35963e-02
+[2023-12-07 18:41:39,946][Train][INFO] - initial loss: 2.57987e-02
+[2023-12-07 18:41:39,946][Train][INFO] - boundary loss: 8.37676e-04
+[2023-12-07 18:41:39,946][Train][INFO] - total loss: 4.02327e-02
+[2023-12-07 18:41:40,000][Train][INFO] - step: 261
+[2023-12-07 18:41:40,000][Train][INFO] - pde loss: 1.71627e-02
+[2023-12-07 18:41:40,001][Train][INFO] - initial loss: 2.23126e-02
+[2023-12-07 18:41:40,001][Train][INFO] - boundary loss: 2.05668e-03
+[2023-12-07 18:41:40,001][Train][INFO] - total loss: 4.15320e-02
+[2023-12-07 18:41:40,063][Train][INFO] - step: 262
+[2023-12-07 18:41:40,063][Train][INFO] - pde loss: 1.89689e-02
+[2023-12-07 18:41:40,063][Train][INFO] - initial loss: 2.03694e-02
+[2023-12-07 18:41:40,064][Train][INFO] - boundary loss: 2.91434e-03
+[2023-12-07 18:41:40,064][Train][INFO] - total loss: 4.22526e-02
+[2023-12-07 18:41:40,125][Train][INFO] - step: 263
+[2023-12-07 18:41:40,126][Train][INFO] - pde loss: 1.47906e-02
+[2023-12-07 18:41:40,126][Train][INFO] - initial loss: 2.18674e-02
+[2023-12-07 18:41:40,126][Train][INFO] - boundary loss: 8.01020e-04
+[2023-12-07 18:41:40,127][Train][INFO] - total loss: 3.74590e-02
+[2023-12-07 18:41:40,184][Train][INFO] - step: 264
+[2023-12-07 18:41:40,185][Train][INFO] - pde loss: 1.78194e-02
+[2023-12-07 18:41:40,185][Train][INFO] - initial loss: 2.24881e-02
+[2023-12-07 18:41:40,185][Train][INFO] - boundary loss: 8.69193e-04
+[2023-12-07 18:41:40,186][Train][INFO] - total loss: 4.11767e-02
+[2023-12-07 18:41:40,244][Train][INFO] - step: 265
+[2023-12-07 18:41:40,245][Train][INFO] - pde loss: 1.97856e-02
+[2023-12-07 18:41:40,245][Train][INFO] - initial loss: 2.21084e-02
+[2023-12-07 18:41:40,245][Train][INFO] - boundary loss: 1.92878e-03
+[2023-12-07 18:41:40,246][Train][INFO] - total loss: 4.38227e-02
+[2023-12-07 18:41:40,300][Train][INFO] - step: 266
+[2023-12-07 18:41:40,300][Train][INFO] - pde loss: 1.81251e-02
+[2023-12-07 18:41:40,300][Train][INFO] - initial loss: 1.95273e-02
+[2023-12-07 18:41:40,302][Train][INFO] - boundary loss: 2.13983e-03
+[2023-12-07 18:41:40,302][Train][INFO] - total loss: 3.97922e-02
+[2023-12-07 18:41:40,357][Train][INFO] - step: 267
+[2023-12-07 18:41:40,357][Train][INFO] - pde loss: 1.39173e-02
+[2023-12-07 18:41:40,358][Train][INFO] - initial loss: 2.37338e-02
+[2023-12-07 18:41:40,358][Train][INFO] - boundary loss: 1.06746e-03
+[2023-12-07 18:41:40,358][Train][INFO] - total loss: 3.87185e-02
+[2023-12-07 18:41:40,414][Train][INFO] - step: 268
+[2023-12-07 18:41:40,414][Train][INFO] - pde loss: 1.61686e-02
+[2023-12-07 18:41:40,414][Train][INFO] - initial loss: 2.10370e-02
+[2023-12-07 18:41:40,415][Train][INFO] - boundary loss: 1.84627e-03
+[2023-12-07 18:41:40,415][Train][INFO] - total loss: 3.90519e-02
+[2023-12-07 18:41:40,468][Train][INFO] - step: 269
+[2023-12-07 18:41:40,468][Train][INFO] - pde loss: 1.70532e-02
+[2023-12-07 18:41:40,468][Train][INFO] - initial loss: 2.12360e-02
+[2023-12-07 18:41:40,469][Train][INFO] - boundary loss: 2.98029e-03
+[2023-12-07 18:41:40,469][Train][INFO] - total loss: 4.12695e-02
+[2023-12-07 18:41:40,527][Train][INFO] - step: 270
+[2023-12-07 18:41:40,528][Train][INFO] - pde loss: 1.35462e-02
+[2023-12-07 18:41:40,528][Train][INFO] - initial loss: 2.18076e-02
+[2023-12-07 18:41:40,528][Train][INFO] - boundary loss: 1.50819e-03
+[2023-12-07 18:41:40,529][Train][INFO] - total loss: 3.68620e-02
+[2023-12-07 18:41:40,586][Train][INFO] - step: 271
+[2023-12-07 18:41:40,586][Train][INFO] - pde loss: 1.33772e-02
+[2023-12-07 18:41:40,586][Train][INFO] - initial loss: 2.34360e-02
+[2023-12-07 18:41:40,587][Train][INFO] - boundary loss: 1.03755e-03
+[2023-12-07 18:41:40,587][Train][INFO] - total loss: 3.78508e-02
+[2023-12-07 18:41:40,642][Train][INFO] - step: 272
+[2023-12-07 18:41:40,642][Train][INFO] - pde loss: 1.56201e-02
+[2023-12-07 18:41:40,643][Train][INFO] - initial loss: 2.19492e-02
+[2023-12-07 18:41:40,643][Train][INFO] - boundary loss: 2.43653e-03
+[2023-12-07 18:41:40,643][Train][INFO] - total loss: 4.00059e-02
+[2023-12-07 18:41:40,699][Train][INFO] - step: 273
+[2023-12-07 18:41:40,699][Train][INFO] - pde loss: 1.48535e-02
+[2023-12-07 18:41:40,700][Train][INFO] - initial loss: 2.00819e-02
+[2023-12-07 18:41:40,700][Train][INFO] - boundary loss: 1.99285e-03
+[2023-12-07 18:41:40,700][Train][INFO] - total loss: 3.69282e-02
+[2023-12-07 18:41:40,760][Train][INFO] - step: 274
+[2023-12-07 18:41:40,760][Train][INFO] - pde loss: 1.34883e-02
+[2023-12-07 18:41:40,760][Train][INFO] - initial loss: 2.14477e-02
+[2023-12-07 18:41:40,761][Train][INFO] - boundary loss: 1.56919e-03
+[2023-12-07 18:41:40,761][Train][INFO] - total loss: 3.65051e-02
+[2023-12-07 18:41:40,817][Train][INFO] - step: 275
+[2023-12-07 18:41:40,818][Train][INFO] - pde loss: 1.73120e-02
+[2023-12-07 18:41:40,818][Train][INFO] - initial loss: 1.96865e-02
+[2023-12-07 18:41:40,818][Train][INFO] - boundary loss: 1.18373e-03
+[2023-12-07 18:41:40,819][Train][INFO] - total loss: 3.81822e-02
+[2023-12-07 18:41:40,875][Train][INFO] - step: 276
+[2023-12-07 18:41:40,876][Train][INFO] - pde loss: 1.61783e-02
+[2023-12-07 18:41:40,876][Train][INFO] - initial loss: 2.05890e-02
+[2023-12-07 18:41:40,876][Train][INFO] - boundary loss: 1.85546e-03
+[2023-12-07 18:41:40,877][Train][INFO] - total loss: 3.86227e-02
+[2023-12-07 18:41:40,942][Train][INFO] - step: 277
+[2023-12-07 18:41:40,943][Train][INFO] - pde loss: 1.47918e-02
+[2023-12-07 18:41:40,943][Train][INFO] - initial loss: 1.80004e-02
+[2023-12-07 18:41:40,943][Train][INFO] - boundary loss: 1.71861e-03
+[2023-12-07 18:41:40,943][Train][INFO] - total loss: 3.45108e-02

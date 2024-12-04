@@ -1,0 +1,97 @@
+global_conf:
+  seed: 1024
+  device: cuda
+  tensorboard_path: ./tensorboard_log
+model_conf:
+  load_model: false
+  model_path: ./
+  dim:
+    input_dim: 2
+    output_dim: 1
+  layer:
+    layer_n: 4
+    activate: tanh
+    final_activate: Identify
+    norm: false
+    layer_size:
+    - 32
+    - 32
+    - 32
+    - 32
+equation_conf:
+  Burgers:
+    layer_n: 3
+    layer_size:
+    - 32
+    - 32
+    - 32
+    output_dim: 1
+    weight_dict:
+      PINN-O: PINN-O/best.pth
+      PINN-DMIS_1000: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-11-22/18-08-39/Burgers_10000.pth
+      PINN-My_1000: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-11-22/18-28-19/Burgers_19750.pth
+      PINN_Nabia_1000: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-12-07/19-18-57/Burgers_11500.pth
+      PINN_Nabia_my1000: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-12-07/18-57-29/Burgers_18750.pth
+      PINN_uni: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-11-10/14-24-41/Burgers_7750.pth
+      newmy: F:/StudyNote/PINN_e/DMIS-main/outputs/2024-02-05/19-52-26/Burgers_19750.pth
+      newmy_: F:/StudyNote/PINN_e/DMIS-main/outputs/2024-02-05/21-13-06/Burgers_18250.pth
+      newDMIS: F:/StudyNote/PINN_e/DMIS-main/outputs/2024-02-05/18-43-42/Burgers_8750.pth
+      newd: outputs/2024-02-05/21-44-46/Burgers_18250.pth
+  KDV:
+    layer_n: 4
+    layer_size:
+    - 64
+    - 64
+    - 64
+    - 64
+    output_dim: 1
+    weight_dict:
+      PINN-O: PINN-O/best.pth
+      PINN-N: PINN-N/best.pth
+      PINN-DMIS: PINN-DMIS/best.pth
+      PINN-DMIS-1000: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-11-23/20-00-10/KDV_49000.pth
+      PINN-My-1000: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-11-23/11-48-18/KDV_49250.pth
+      PINN_Nabia_my1000: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-12-08/15-43-24/KDV_40000.pth
+      PINN_Nabia_1000: F:/StudyNote/PINN_e/DMIS-main/outputs/2023-12-08/12-09-49/KDV_32750.pth
+  Schrodinger:
+    layer_n: 4
+    layer_size:
+    - 64
+    - 64
+    - 64
+    - 64
+    output_dim: 2
+    weight_dict:
+      PINN-O: PINN-O/best.pth
+      PINN-N: PINN-N/best.pth
+      PINN-DMIS: PINN-DMIS/best.pth
+  Diffusion:
+    layer_n: 4
+    layer_size:
+    - 32
+    - 32
+    - 32
+    - 32
+    output_dim: 1
+    weight_dict:
+      PINN-O: PINN-O/best.pth
+      PINN-N: PINN-N/best.pth
+      PINN-DMIS: PINN-DMIS/best.pth
+  ACEquation:
+    layer_n: 5
+    layer_size:
+    - 64
+    - 64
+    - 64
+    - 64
+    - 64
+    output_dim: 1
+    weight_dict:
+      PINN-O: PINN-O/best.pth
+      PINN-N: PINN-N/best.pth
+      PINN-DMIS: PINN-DMIS/best.pth
+evaluation_metrics:
+- max error
+- mean absolute error
+- RMSE
+- MAPE

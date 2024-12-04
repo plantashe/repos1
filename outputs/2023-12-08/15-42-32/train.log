@@ -1,0 +1,138 @@
+[2023-12-08 15:42:32,767][Train][INFO] - global_conf:
+  seed: 1000
+  device: cuda
+  tensorboard_path: ./tensorboard_log
+data_conf:
+  initial_data_n: 2000
+  boundary_data_n: 2000
+  pde_data_n: 100000
+model_conf:
+  load_model: false
+  model_path: ./
+  dim:
+    input_dim: 2
+    output_dim: 1
+  layer:
+    layer_n: 3
+    activate: tanh
+    final_activate: Identify
+    norm: false
+    layer_size:
+    - 32
+    - 32
+    - 32
+train_conf:
+  train_t_range:
+  - 0
+  - 0.6
+  eval_t_range:
+  - 0.6
+  - 0.8
+  test_t_range:
+  - 0.8
+  - 1.0
+  pde_sampler: NabianMethod_xiaobo
+  pde_reweighting: BiasedReWeighting
+  optim_conf:
+    lr: 0.005
+    betas:
+    - 0.9
+    - 0.999
+    eps: 1.0e-08
+    weight_decay: 0.0
+    amsgrad: false
+  main_conf:
+    max_steps: 20000
+    pde_batch_size: 5000
+    initial_batch_size: 500
+    boundary_batch_size: 500
+    print_frequency: 1
+    eval_frequency: 250
+    model_save_folder: ./
+    model_basic_save_name: ${name}
+  reweighting_params:
+    k_init: 1
+    k_final: 1.5
+    iter_n: ${train_conf.main_conf.max_steps}
+  sampler_conf:
+    forward_batch_size: ${train_conf.main_conf.pde_batch_size}
+    mesh_update_thres: 0.4
+    addon_points:
+    - - 0.0
+      - 1.0
+    - - 0.0
+      - -1.0
+    - - 0.6
+      - 1.0
+    - - 0.6
+      - -1.0
+    seed_n: 1000
+name: Burgers
+problem_conf:
+  dims: 2
+  x_range:
+  - -1
+  - 1
+  t_range:
+  - 0.0
+  - 1.0
+  initial_cond: -sin(pi * x)
+  boundary_cond: 0 * x
+
+[2023-12-08 15:42:32,767][Train][INFO] - device: cuda
+[2023-12-08 15:42:32,767][Train][INFO] - create model...
+[2023-12-08 15:42:32,871][Train][INFO] - FullyConnectedNetwork(
+  (_network): Sequential(
+    (layer_1): Sequential(
+      (0): Linear(in_features=2, out_features=32, bias=True)
+      (1): Tanh()
+    )
+    (layer_2): Sequential(
+      (0): Linear(in_features=32, out_features=32, bias=True)
+      (1): Tanh()
+    )
+    (layer_3): Sequential(
+      (0): Linear(in_features=32, out_features=32, bias=True)
+      (1): Tanh()
+    )
+    (layer_4): Sequential(
+      (0): Linear(in_features=32, out_features=1, bias=True)
+    )
+  )
+)
+[2023-12-08 15:42:32,886][Train][INFO] - create problem data successful...
+[2023-12-08 15:42:32,902][Train][INFO] - split dataset successful...
+[2023-12-08 15:42:34,472][Train][INFO] - step: 0
+[2023-12-08 15:42:34,472][Train][INFO] - pde loss: 4.21030e-04
+[2023-12-08 15:42:34,472][Train][INFO] - initial loss: 5.79868e-01
+[2023-12-08 15:42:34,472][Train][INFO] - boundary loss: 1.69617e-02
+[2023-12-08 15:42:34,472][Train][INFO] - total loss: 5.97250e-01
+[2023-12-08 15:42:34,472][Train][INFO] - evaluation
+[2023-12-08 15:42:34,487][Train][INFO] - train area: peak error:9.8737e-01, absolute error:5.5162e-01, l2 error:3.9830e-01
+[2023-12-08 15:42:34,488][Train][INFO] - eval area: peak error:8.9060e-01, absolute error:4.1851e-01, l2 error:2.4448e-01
+[2023-12-08 15:42:34,490][Train][INFO] - test area: peak error:7.7015e-01, absolute error:3.5028e-01, l2 error:1.7366e-01
+[2023-12-08 15:42:34,556][Train][INFO] - step: 1
+[2023-12-08 15:42:34,556][Train][INFO] - pde loss: 7.46832e-04
+[2023-12-08 15:42:34,556][Train][INFO] - initial loss: 4.56297e-01
+[2023-12-08 15:42:34,556][Train][INFO] - boundary loss: 7.56334e-03
+[2023-12-08 15:42:34,556][Train][INFO] - total loss: 4.64607e-01
+[2023-12-08 15:42:34,623][Train][INFO] - step: 2
+[2023-12-08 15:42:34,623][Train][INFO] - pde loss: 8.80410e-04
+[2023-12-08 15:42:34,623][Train][INFO] - initial loss: 3.75234e-01
+[2023-12-08 15:42:34,623][Train][INFO] - boundary loss: 4.09212e-02
+[2023-12-08 15:42:34,623][Train][INFO] - total loss: 4.17035e-01
+[2023-12-08 15:42:34,690][Train][INFO] - step: 3
+[2023-12-08 15:42:34,690][Train][INFO] - pde loss: 4.28899e-03
+[2023-12-08 15:42:34,690][Train][INFO] - initial loss: 3.50366e-01
+[2023-12-08 15:42:34,690][Train][INFO] - boundary loss: 1.03658e-01
+[2023-12-08 15:42:34,690][Train][INFO] - total loss: 4.58314e-01
+[2023-12-08 15:42:34,756][Train][INFO] - step: 4
+[2023-12-08 15:42:34,756][Train][INFO] - pde loss: 9.03555e-03
+[2023-12-08 15:42:34,756][Train][INFO] - initial loss: 3.16746e-01
+[2023-12-08 15:42:34,756][Train][INFO] - boundary loss: 1.47796e-01
+[2023-12-08 15:42:34,756][Train][INFO] - total loss: 4.73578e-01
+[2023-12-08 15:42:34,822][Train][INFO] - step: 5
+[2023-12-08 15:42:34,822][Train][INFO] - pde loss: 8.45556e-03
+[2023-12-08 15:42:34,822][Train][INFO] - initial loss: 2.98282e-01
+[2023-12-08 15:42:34,822][Train][INFO] - boundary loss: 1.36928e-01
+[2023-12-08 15:42:34,822][Train][INFO] - total loss: 4.43665e-01

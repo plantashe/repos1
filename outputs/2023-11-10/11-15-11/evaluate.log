@@ -1,0 +1,87 @@
+[2023-11-10 11:15:11,426][evaluation][INFO] - Burgers
+[2023-11-10 11:15:11,426][evaluation][INFO] - create model and load weight
+[2023-11-10 11:15:11,572][evaluation][INFO] - load ground true
+[2023-11-10 11:15:11,575][evaluation][INFO] - pred
+[2023-11-10 11:15:11,620][evaluation][INFO] - evaluation
+[2023-11-10 11:15:11,621][evaluation][INFO] - print evaluation result
+[2023-11-10 11:15:11,622][evaluation][INFO] - PINN-O_max error: 4.50525e-01
+[2023-11-10 11:15:11,622][evaluation][INFO] - PINN-O_mean absolute error: 7.38042e-02
+[2023-11-10 11:15:11,622][evaluation][INFO] - PINN-O_RMSE: 1.09995e-01
+[2023-11-10 11:15:11,622][evaluation][INFO] - PINN-DMIS_1000_max error: 3.20898e-01
+[2023-11-10 11:15:11,622][evaluation][INFO] - PINN-DMIS_1000_mean absolute error: 2.47506e-02
+[2023-11-10 11:15:11,668][evaluation][INFO] - PINN-DMIS_1000_RMSE: 5.08773e-02
+[2023-11-10 11:15:11,668][evaluation][INFO] - PINN-DMIS_400_max error: 3.88908e-01
+[2023-11-10 11:15:11,668][evaluation][INFO] - PINN-DMIS_400_mean absolute error: 2.33098e-02
+[2023-11-10 11:15:11,669][evaluation][INFO] - PINN-DMIS_400_RMSE: 5.84194e-02
+[2023-11-10 11:15:11,669][evaluation][INFO] - PINN-My_max error: 3.11224e-01
+[2023-11-10 11:15:11,669][evaluation][INFO] - PINN-My_mean absolute error: 3.65282e-02
+[2023-11-10 11:15:11,670][evaluation][INFO] - PINN-My_RMSE: 7.06066e-02
+[2023-11-10 11:15:11,670][evaluation][INFO] - PINN-My_1000_max error: 4.10956e-01
+[2023-11-10 11:15:11,670][evaluation][INFO] - PINN-My_1000_mean absolute error: 3.39770e-02
+[2023-11-10 11:15:11,670][evaluation][INFO] - PINN-My_1000_RMSE: 7.32604e-02
+[2023-11-10 11:15:11,670][evaluation][INFO] - PINN-MyNo_max error: 4.59688e-01
+[2023-11-10 11:15:11,670][evaluation][INFO] - PINN-MyNo_mean absolute error: 4.59232e-02
+[2023-11-10 11:15:11,671][evaluation][INFO] - PINN-MyNo_RMSE: 7.53102e-02
+[2023-11-10 11:15:11,671][evaluation][INFO] - PINN-DMISNo_max error: 3.18945e-01
+[2023-11-10 11:15:11,671][evaluation][INFO] - PINN-DMISNo_mean absolute error: 4.51175e-02
+[2023-11-10 11:15:11,671][evaluation][INFO] - PINN-DMISNo_RMSE: 6.35908e-02
+[2023-11-10 11:15:11,671][evaluation][INFO] - KDV
+[2023-11-10 11:15:11,671][evaluation][INFO] - create model and load weight
+[2023-11-10 11:15:11,684][evaluation][INFO] - load ground true
+[2023-11-10 11:15:11,686][evaluation][INFO] - pred
+[2023-11-10 11:15:11,688][evaluation][INFO] - evaluation
+[2023-11-10 11:15:11,688][evaluation][INFO] - print evaluation result
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-O_max error: 2.13798e+00
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-O_mean absolute error: 3.63186e-01
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-O_RMSE: 5.20034e-01
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-N_max error: 1.86019e+00
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-N_mean absolute error: 2.92285e-01
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-N_RMSE: 4.40908e-01
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-DMIS_max error: 1.16943e+00
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-DMIS_mean absolute error: 3.91233e-01
+[2023-11-10 11:15:11,689][evaluation][INFO] - PINN-DMIS_RMSE: 4.91797e-01
+[2023-11-10 11:15:11,689][evaluation][INFO] - Schrodinger
+[2023-11-10 11:15:11,690][evaluation][INFO] - create model and load weight
+[2023-11-10 11:15:11,704][evaluation][INFO] - load ground true
+[2023-11-10 11:15:11,706][evaluation][INFO] - pred
+[2023-11-10 11:15:11,708][evaluation][INFO] - evaluation
+[2023-11-10 11:15:11,709][evaluation][INFO] - print evaluation result
+[2023-11-10 11:15:11,709][evaluation][INFO] - PINN-O_max error: 1.36405e+00
+[2023-11-10 11:15:11,709][evaluation][INFO] - PINN-O_mean absolute error: 1.86091e-01
+[2023-11-10 11:15:11,709][evaluation][INFO] - PINN-O_RMSE: 4.09185e-01
+[2023-11-10 11:15:11,709][evaluation][INFO] - PINN-N_max error: 9.48379e-01
+[2023-11-10 11:15:11,709][evaluation][INFO] - PINN-N_mean absolute error: 1.48743e-01
+[2023-11-10 11:15:11,709][evaluation][INFO] - PINN-N_RMSE: 2.90647e-01
+[2023-11-10 11:15:11,710][evaluation][INFO] - PINN-DMIS_max error: 6.46830e-01
+[2023-11-10 11:15:11,710][evaluation][INFO] - PINN-DMIS_mean absolute error: 1.26961e-01
+[2023-11-10 11:15:11,710][evaluation][INFO] - PINN-DMIS_RMSE: 2.19637e-01
+[2023-11-10 11:15:11,710][evaluation][INFO] - Diffusion
+[2023-11-10 11:15:11,710][evaluation][INFO] - create model and load weight
+[2023-11-10 11:15:11,720][evaluation][INFO] - load ground true
+[2023-11-10 11:15:11,722][evaluation][INFO] - pred
+[2023-11-10 11:15:11,725][evaluation][INFO] - evaluation
+[2023-11-10 11:15:11,725][evaluation][INFO] - print evaluation result
+[2023-11-10 11:15:11,725][evaluation][INFO] - PINN-O_max error: 1.81117e-01
+[2023-11-10 11:15:11,725][evaluation][INFO] - PINN-O_mean absolute error: 8.91539e-02
+[2023-11-10 11:15:11,725][evaluation][INFO] - PINN-O_RMSE: 9.48327e-02
+[2023-11-10 11:15:11,725][evaluation][INFO] - PINN-N_max error: 1.58255e-01
+[2023-11-10 11:15:11,726][evaluation][INFO] - PINN-N_mean absolute error: 7.55420e-02
+[2023-11-10 11:15:11,726][evaluation][INFO] - PINN-N_RMSE: 8.07936e-02
+[2023-11-10 11:15:11,726][evaluation][INFO] - PINN-DMIS_max error: 5.33337e-02
+[2023-11-10 11:15:11,726][evaluation][INFO] - PINN-DMIS_mean absolute error: 1.62170e-02
+[2023-11-10 11:15:11,726][evaluation][INFO] - PINN-DMIS_RMSE: 1.93971e-02
+[2023-11-10 11:15:11,726][evaluation][INFO] - ACEquation
+[2023-11-10 11:15:11,726][evaluation][INFO] - create model and load weight
+[2023-11-10 11:15:11,738][evaluation][INFO] - load ground true
+[2023-11-10 11:15:11,740][evaluation][INFO] - pred
+[2023-11-10 11:15:11,743][evaluation][INFO] - evaluation
+[2023-11-10 11:15:11,744][evaluation][INFO] - print evaluation result
+[2023-11-10 11:15:11,744][evaluation][INFO] - PINN-O_max error: 1.40560e+00
+[2023-11-10 11:15:11,744][evaluation][INFO] - PINN-O_mean absolute error: 1.32661e-01
+[2023-11-10 11:15:11,744][evaluation][INFO] - PINN-O_RMSE: 2.32423e-01
+[2023-11-10 11:15:11,745][evaluation][INFO] - PINN-N_max error: 1.40372e+00
+[2023-11-10 11:15:11,745][evaluation][INFO] - PINN-N_mean absolute error: 1.06532e-01
+[2023-11-10 11:15:11,745][evaluation][INFO] - PINN-N_RMSE: 2.02860e-01
+[2023-11-10 11:15:11,745][evaluation][INFO] - PINN-DMIS_max error: 1.03741e+00
+[2023-11-10 11:15:11,745][evaluation][INFO] - PINN-DMIS_mean absolute error: 8.59468e-02
+[2023-11-10 11:15:11,745][evaluation][INFO] - PINN-DMIS_RMSE: 1.50345e-01
